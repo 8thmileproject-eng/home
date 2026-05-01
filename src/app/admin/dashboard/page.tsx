@@ -189,8 +189,8 @@ export default function AdminDashboardPage() {
             <a href="/admin/donations" className="text-sm text-[#2d5a3d] hover:underline">View All</a>
           </div>
           <div className="divide-y divide-gray-100">
-            {stats?.recentDonations.length > 0 ? (
-              stats.recentDonations.map((donation: Donation) => (
+            {(stats?.recentDonations?.length ?? 0) > 0 ? (
+              stats?.recentDonations?.map((donation: Donation) => (
                 <div key={donation.id} className="px-6 py-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-[#e8f0e8] rounded-full flex items-center justify-center">
@@ -217,8 +217,8 @@ export default function AdminDashboardPage() {
             <a href="/admin/partners" className="text-sm text-[#2d5a3d] hover:underline">View All</a>
           </div>
           <div className="divide-y divide-gray-100">
-            {stats?.recentPartners.length > 0 ? (
-              stats.recentPartners.map((partner: Partner) => (
+            {(stats?.recentPartners?.length ?? 0) > 0 ? (
+              stats?.recentPartners?.map((partner: Partner) => (
                 <div key={partner.id} className="px-6 py-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
