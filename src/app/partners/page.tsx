@@ -22,7 +22,7 @@ const partnerTypes = [
     icon: Building2,
     title: "Corporate Partners",
     description:
-      "Businesses and organizations that provide financial support, resources, and expertise to amplify our impact.",
+      "Whether through financial support, shared resources, or professional expertise, your business can play a vital role in amplifying our impact and driving real change.",
     benefits: [
       "Brand visibility across our outreach programs",
       "Employee volunteer opportunities",
@@ -36,7 +36,7 @@ const partnerTypes = [
     icon: Church,
     title: "Church Partners",
     description:
-      "Local and international churches that pray, give, and send volunteers to support our mission outreaches.",
+      "Stand with us in faith. Your congregation can partner with our missions through dedicated prayer, generous giving, and by sending volunteers to the field.",
     benefits: [
       "Mission trip coordination",
       "Joint community programs",
@@ -50,7 +50,7 @@ const partnerTypes = [
     icon: GraduationCap,
     title: "Academic Partners",
     description:
-      "Schools and universities that collaborate on student support programs, research, and service learning.",
+      "Let's learn and grow together. We collaborate with schools and universities on student support programs, impactful research, and hands-on service learning.",
     benefits: [
       "Student internship programs",
       "Research collaboration",
@@ -64,7 +64,7 @@ const partnerTypes = [
     icon: Briefcase,
     title: "Professional Partners",
     description:
-      "Individuals and firms offering pro-bono services in healthcare, legal, construction, and more.",
+      "Use your skills for good. We welcome individuals and firms willing to offer pro-bono services in healthcare, legal work, construction, and beyond.",
     benefits: [
       "Skill-based volunteering",
       "Professional network expansion",
@@ -170,7 +170,7 @@ export default function PartnersPage() {
           {["Home", "Projects", "Partners", "Our Faith", "Contact"].map((item) => (
             <a
               key={item}
-              href={item === "Home" ? "/" : item === "Our Faith" ? "/#our-faith" : item === "Partners" ? "/partners" : "#"}
+              href={item === "Home" ? "/" : item === "Our Faith" ? "/our-faith" : item === "Partners" ? "/partners" : item === "Projects" ? "/projects" : "#"}
               className={`px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full ${item === "Partners" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e]"}`}
             >
               {item}
@@ -212,7 +212,7 @@ export default function PartnersPage() {
               {["Home", "Projects", "Partners", "Our Faith", "Contact"].map((item) => (
                 <a
                   key={item}
-                  href={item === "Home" ? "/" : item === "Our Faith" ? "/#our-faith" : item === "Partners" ? "/partners" : "#"}
+                  href={item === "Home" ? "/" : item === "Our Faith" ? "/our-faith" : item === "Partners" ? "/partners" : item === "Projects" ? "/projects" : "#"}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${item === "Partners" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e] hover:bg-gray-50"}`}
                 >
@@ -233,8 +233,8 @@ export default function PartnersPage() {
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/hero.png" alt="Partnership" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1a3d2e]/90 via-[#1a3d2e]/70 to-[#1a3d2e]/40" />
+          <Image src="/vp.jpg" alt="Partnership" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1a3d2e]/90 via-[#1a3d2e]/50 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
@@ -264,11 +264,11 @@ export default function PartnersPage() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F5F5F5] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-48 sm:h-64 bg-gradient-to-t from-[#F5F5F5] via-[#F5F5F5]/80 to-transparent" />
       </section>
 
       {/* --- WHY PARTNER SECTION --- */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F5F5F5]">
+      {/* <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#1a3d2e]/10 rounded-full text-[#1a3d2e] text-xs font-bold tracking-wider uppercase mb-6">
@@ -299,7 +299,7 @@ export default function PartnersPage() {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* --- PARTNER TYPES SECTION --- */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
@@ -330,8 +330,8 @@ export default function PartnersPage() {
                       <div className="space-y-3">
                         {partner.benefits.map((benefit, index) => (
                           <div key={index} className="flex items-center gap-3">
-                            <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: partner.accentColor }} />
-                            <span className="text-gray-700 text-sm">{benefit}</span>
+                            {/* <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: partner.accentColor }} />
+                            <span className="text-gray-700 text-sm">{benefit}</span> */}
                           </div>
                         ))}
                       </div>
@@ -528,8 +528,8 @@ export default function PartnersPage() {
                 {[
                   { label: "Home", href: "/" },
                   { label: "About Us", href: "#" },
-                  { label: "Our Projects", href: "#" },
-                  { label: "Our Faith", href: "/#our-faith" },
+                  { label: "Our Projects", href: "/projects" },
+                  { label: "Our Faith", href: "/our-faith" },
                   { label: "Contact", href: "#" }
                 ].map((link) => (
                   <li key={link.label}>
@@ -543,11 +543,11 @@ export default function PartnersPage() {
               <h4 className="text-white font-bold mb-6">Our Programs</h4>
               <ul className="space-y-3">
                 {[
-                  { label: "Medical Outreaches", href: "/#touching-lives" },
-                  { label: "Student Support", href: "/#touching-lives" },
-                  { label: "Back to School", href: "/#touching-lives" },
-                  { label: "Homes for Widows", href: "/#touching-lives" },
-                  { label: "Bible Donation", href: "/#touching-lives" }
+                  { label: "Medical Outreaches", href: "/projects" },
+                  { label: "Student Support", href: "/projects" },
+                  { label: "Back to School", href: "/projects" },
+                  { label: "Homes for Widows", href: "/projects" },
+                  { label: "Bible Donation", href: "/projects" }
                 ].map((program) => (
                   <li key={program.label}>
                     <a href={program.href} className="text-white/60 hover:text-white transition-colors text-sm">{program.label}</a>

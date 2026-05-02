@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function OurFaithSection() {
     return (
         <section id="our-faith" className="py-24 px-8 md:px-16 lg:px-24 bg-white overflow-hidden relative">
@@ -8,21 +10,24 @@ export default function OurFaithSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left - Visual Content */}
                     <div className="relative group animate-in fade-in slide-in-from-left-8 duration-1000">
-                        <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden bg-[#1a3d2e] p-12 flex flex-col justify-center border border-brand-accent shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
-                            <div className="mb-8 w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">
-                                ✝️
-                            </div>
-                            <h3 className="text-4xl font-bold text-white mb-6 uppercase tracking-tight">Our <span className="text-brand-sage">Faith</span></h3>
-                            <div className="space-y-4">
-                                <div className="h-1 w-20 bg-brand-sage rounded-full" />
-                                <p className="text-brand-accent/80 text-lg font-medium italic">
-                                    &quot;Go into all the world and preach the gospel to all creation.&quot;
-                                </p>
-                            </div>
+                        <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden bg-[#1a3d2e] border border-brand-accent shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
+                            <Image src="/of.jpg" alt="Our Faith" fill className="object-cover" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#1a3d2e]/90 via-[#1a3d2e]/70 to-[#1a3d2e]/50" />
 
-                            {/* Subtle texture or pattern could go here */}
-                            <div className="absolute bottom-0 right-0 p-8 text-6xl opacity-10 font-bold select-none">
-                                FAITH
+                            <div className="relative z-10 p-12 h-full flex flex-col justify-center">
+
+                                <h3 className="text-4xl font-bold text-white mb-6 uppercase tracking-tight">Our <span className="text-brand-sage">Faith</span></h3>
+                                <div className="space-y-4">
+                                    <div className="h-1 w-20 bg-brand-sage rounded-full" />
+                                    <p className="text-brand-accent/80 text-lg font-medium italic">
+                                        &quot;Go into all the world and preach the gospel to all creation.&quot;
+                                    </p>
+                                </div>
+
+                                {/* Subtle texture or pattern could go here */}
+                                <div className="absolute bottom-0 right-0 p-8 text-6xl text-white opacity-10 font-bold select-none">
+                                    FAITH
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -46,12 +51,9 @@ export default function OurFaithSection() {
                                     The Triune God
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed text-lg">
-                                    We believe that the one and only God is Spirit, self-existing, infinite, personal,
-                                    immutable and eternal in His being. We believe in His perfect holiness, love, justice,
-                                    goodness, wisdom and truth, omnipotence, Omniscience, and Omnipresence. We believe
-                                    that God is the Creator and sustainer of the universe, and that He is eternally
-                                    existent in three persons, one in substance and co-equal in power and glory—Father,
-                                    Son and Holy Spirit.
+                                    We believe that the one and only God is Spirit, self-existing, infinite,
+                                    personal, immutable and eternal in His being. We believe in His perfect holiness, love, justice, goodness, wisdom and truth, omnipotence, Omniscience, and Omnipresence. We believe that God is the Creator and sustainer of the universe, and that He is eternally existent in three persons,
+                                    one in substance and co- equal in power and glory- Father, Son and Holy Spirit.
                                 </p>
                             </div>
 
@@ -62,19 +64,15 @@ export default function OurFaithSection() {
                                     The Bible
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed text-lg">
-                                    We believe that the Bible, consisting of the sixty-six books of both old and new testaments,
-                                    given by divine inspiration, is inherent in its original manuscripts and is the final
-                                    authority in matters pertaining to faith and conduct. We accept the right and duty
-                                    of personal judgment, under the illumination of the Holy Spirit, in the interpretation
-                                    of the Holy Scripture. II Timothy 3:16, I Peter 1:25, II Peter 1: 21.
+                                    We believe that the Bible, consisting of the sixty-six books of both old and new testaments, given by divine inspiration, is inherent in its original manuscripts and is the final authority in matters pertaining to faith and conduct. We accept the right and duty of personal judgment, under the illumination of the Holy Spirit,
+                                    in the interpretation of the Holy Scripture. II Timothy 3:16, I Peter 1:25, II Peter 1: 21. .
                                 </p>
                             </div>
                         </div>
 
                         <div className="pt-4">
                             <a
-                                href="https://8thmileproject.org/our-faith"
-                                target="_blank"
+                                href="/our-faith"
                                 className="inline-flex items-center gap-2 text-[#2d5a3d] font-bold text-lg hover:gap-4 transition-all duration-300 group"
                             >
                                 Read our full Statement of Faith

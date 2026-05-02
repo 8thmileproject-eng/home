@@ -29,7 +29,7 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    image: "/hero.png",
+    image: "/fss.jpg",
     tag: "RURAL MEDICAL OUTREACHES",
     headline: "Free Medical Services\nto the Sick",
     description: "We provide mobile clinical services, health education, and free medication to rural dwellers with limited access to healthcare.",
@@ -40,7 +40,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    image: "/hero.png",
+    image: "/bp.jpg",
     tag: "EMPOWERMENT & EDUCATION",
     headline: "Breaking Poverty\nThrough Student Support",
     description: "Through our Back to School programs and student assistance, we equip the next generation for a brighter future.",
@@ -112,13 +112,13 @@ export default function HeroCarousel() {
             <div className="absolute inset-0 bg-black/10" />
 
             {/* Bottom gradient for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent lg:from-black/90 lg:via-black/40" />
 
             {/* Content Container - Stacked on mobile, side by side on desktop */}
             <div className="absolute inset-0 flex flex-col lg:grid lg:grid-cols-2 lg:gap-8">
               {/* Left Content */}
               <div
-                className={`flex flex-col justify-end pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 lg:pl-20 transition-all duration-700 delay-200 ${currentSlide === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                className={`flex flex-col justify-end pb-44 sm:pb-40 lg:pb-16 px-4 sm:px-6 lg:pl-20 transition-all duration-700 delay-200 ${currentSlide === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
               >
                 {/* Tag */}

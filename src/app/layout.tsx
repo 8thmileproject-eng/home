@@ -7,8 +7,8 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "CareNest | Together We Support, Educate and Heal",
-  description: "Making lives better through transparent and effective donations.",
+  title: "8th Mile Project",
+  description: "The missions' arm of YWAP, caring for people in need as instructed in Matthew 25:35-40.",
 };
 
 export default function RootLayout({

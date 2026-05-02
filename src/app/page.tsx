@@ -9,6 +9,8 @@ import TakeActionSection from "./components/TakeActionSection";
 import TouchingLivesSection from "./components/TouchingLivesSection";
 import HowWeWorkSection from "./components/HowWeWorkSection";
 import OurFaithSection from "./components/OurFaithSection";
+import OurHistorySection from "./components/OurHistorySection";
+import ImageGallerySection from "./components/ImageGallerySection";
 import ImpactStatsSection from "./components/ImpactStatsSection";
 
 export default function Home() {
@@ -34,12 +36,14 @@ export default function Home() {
                 item === "Home"
                   ? "/"
                   : item === "Our Faith"
-                    ? "#our-faith"
+                    ? "/our-faith"
                     : item === "Partners"
                       ? "/partners"
-                      : item === "Reporting"
-                        ? "/reporting"
-                        : "#"
+                      : item === "Projects"
+                        ? "/projects"
+                        : item === "Reporting"
+                          ? "/reporting"
+                          : "#"
               }
               className={`px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full ${item === "Home" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e]"
                 }`}
@@ -90,12 +94,14 @@ export default function Home() {
                     item === "Home"
                       ? "/"
                       : item === "Our Faith"
-                        ? "#our-faith"
+                        ? "/our-faith"
                         : item === "Partners"
                           ? "/partners"
-                          : item === "Reporting"
-                            ? "/reporting"
-                            : "#"
+                          : item === "Projects"
+                            ? "/projects"
+                            : item === "Reporting"
+                              ? "/reporting"
+                              : "#"
                   }
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${item === "Home" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e] hover:bg-gray-50"
@@ -137,6 +143,12 @@ export default function Home() {
 
       {/* --- OUR FAITH SECTION --- */}
       <OurFaithSection />
+
+      {/* --- OUR HISTORY SECTION --- */}
+      <OurHistorySection />
+
+      {/* --- IMAGE GALLERY SECTION --- */}
+      <ImageGallerySection />
 
       {/* --- IMPACT STATS SECTION --- */}
       <ImpactStatsSection />
@@ -198,8 +210,8 @@ export default function Home() {
                 {[
                   { label: "Home", href: "/" },
                   { label: "About Us", href: "#" },
-                  { label: "Our Projects", href: "#" },
-                  { label: "Our Faith", href: "#our-faith" },
+                  { label: "Our Projects", href: "/projects" },
+                  { label: "Our Faith", href: "/our-faith" },
                   { label: "Contact", href: "#" }
                 ].map((link) => (
                   <li key={link.label}>
@@ -214,11 +226,11 @@ export default function Home() {
               <h4 className="text-white font-bold mb-6">Our Programs</h4>
               <ul className="space-y-3">
                 {[
-                  { label: "Medical Outreaches", href: "#touching-lives" },
-                  { label: "Student Support", href: "#touching-lives" },
-                  { label: "Back to School", href: "#touching-lives" },
-                  { label: "Homes for Widows", href: "#touching-lives" },
-                  { label: "Bible Donation", href: "#touching-lives" }
+                  { label: "Medical Outreaches", href: "/projects" },
+                  { label: "Student Support", href: "/projects" },
+                  { label: "Back to School", href: "/projects" },
+                  { label: "Homes for Widows", href: "/projects" },
+                  { label: "Bible Donation", href: "/projects" }
                 ].map((program) => (
                   <li key={program.label}>
                     <a href={program.href} className="text-white/60 hover:text-white transition-colors text-sm">{program.label}</a>

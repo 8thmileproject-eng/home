@@ -7,9 +7,9 @@ export default function HowWeWorkSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left - Image */}
           <div className="relative">
-            <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden">
+            <div className="relative aspect-[4/4] rounded-[40px] overflow-hidden">
               <Image
-                src="/hero.png"
+                src="/vp.jpg"
                 alt="Our Team"
                 fill
                 className="object-cover"
@@ -18,9 +18,9 @@ export default function HowWeWorkSection() {
             </div>
 
             {/* Experience Badge */}
-            <div className="absolute -bottom-8 -right-8 bg-[#2d5a3d] text-white rounded-3xl p-8 shadow-2xl">
-              <div className="text-6xl font-bold mb-2">15+</div>
-              <div className="text-lg opacity-90">Years of<br />Service</div>
+            <div className="absolute -bottom-8 -right-8 bg-[#2d5a3d] text-white rounded-3xl p-4 shadow-2xl">
+              <div className="text-6xl font-bold mb-2">20+</div>
+              <div className="text-lg opacity-90">Years of Service</div>
             </div>
           </div>
 
@@ -35,24 +35,21 @@ export default function HowWeWorkSection() {
             </h2>
 
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              The 8th Mile is volunteer and partnership based, our objectives are realised
-              through YWAP centres that are spread across Nigeria. We mobilize and connect
-              the hearts, skills and resources of local and international partners who
-              believe in our goals.
+              The 8th Mile  is volunteer and partnership based. we achieve our objectives through  YWAP centres that are spread across Nigeria.
             </p>
 
             <div className="space-y-6">
               {[
                 {
-                  title: "Mobilize Hearts & Skills",
+                  title: "Mobilizing Hearts & Skills",
                   description: "We mobilize and connect the hearts, skills and resources of local and international partners who believe in our goals."
                 },
                 {
-                  title: "YWAP Network",
+                  title: "YWAP Centres",
                   description: "Our objectives are realised through Youth With A Purpose (YWAP) centres that are spread across Nigeria."
                 },
                 {
-                  title: "Long-lasting Empowerment",
+                  title: "Sustainable Empowerment",
                   description: "Our goal is to help alleviate human suffering in rural communities and urban slums through empowerment."
                 }
               ].map((item, index) => (
