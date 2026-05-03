@@ -249,9 +249,9 @@ export default function OurFaithPage() {
             <div>
               <h4 className="text-white font-bold mb-6">Contact Us</h4>
               <ul className="space-y-3 text-white/60 text-sm">
-                <li><a href="mailto:info@8thmileproject.org" className="hover:text-white transition-colors">info@8thmileproject.org</a></li>
+                <li><a href="mailto:info@the8thmileproject.org" className="hover:text-white transition-colors">info@the8thmileproject.org</a></li>
                 <li><a href="tel:+2347039550499" className="hover:text-white transition-colors">+234 703 955 0499</a></li>
-                <li>Kaduna, Nigeria</li>
+                <li>Abuja, Nigeria</li>
               </ul>
             </div>
           </div>

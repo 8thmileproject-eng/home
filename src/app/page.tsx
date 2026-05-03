@@ -29,7 +29,7 @@ export default function Home() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center bg-white rounded-full px-2 py-2 shadow-sm">
-          {["Home", "Projects", "Partners", "Reporting", "Our Faith", "Contact"].map((item) => (
+          {["Home", "Projects", "Partners", "Reporting", "Our Faith", "Volunteer", "Contact"].map((item) => (
             <a
               key={item}
               href={
@@ -43,7 +43,9 @@ export default function Home() {
                         ? "/projects"
                         : item === "Reporting"
                           ? "/reporting"
-                          : "#"
+                          : item === "Volunteer"
+                            ? "/volunteer"
+                            : "#"
               }
               className={`px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full ${item === "Home" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e]"
                 }`}
@@ -87,7 +89,7 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden py-4 px-4">
             <nav className="flex flex-col gap-2">
-              {["Home", "Projects", "Partners", "Reporting", "Our Faith", "Contact"].map((item) => (
+              {["Home", "Projects", "Partners", "Reporting", "Our Faith", "Volunteer", "Contact"].map((item) => (
                 <a
                   key={item}
                   href={
@@ -101,7 +103,9 @@ export default function Home() {
                             ? "/projects"
                             : item === "Reporting"
                               ? "/reporting"
-                              : "#"
+                              : item === "Volunteer"
+                                ? "/volunteer"
+                                : "#"
                   }
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${item === "Home" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e] hover:bg-gray-50"
@@ -243,9 +247,9 @@ export default function Home() {
             <div>
               <h4 className="text-white font-bold mb-6">Contact Us</h4>
               <ul className="space-y-3 text-white/60 text-sm">
-                <li><a href="mailto:info@8thmileproject.org" className="hover:text-white transition-colors">info@8thmileproject.org</a></li>
+                <li><a href="mailto:info@the8thmileproject.org" className="hover:text-white transition-colors">info@the8thmileproject.org</a></li>
                 <li><a href="tel:+2347039550499" className="hover:text-white transition-colors">+234 703 955 0499</a></li>
-                <li>Kaduna, Nigeria</li>
+                <li>Abuja, Nigeria</li>
               </ul>
             </div>
           </div>
