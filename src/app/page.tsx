@@ -155,7 +155,7 @@ export default function Home() {
       <ImageGallerySection />
 
       {/* --- IMPACT STATS SECTION --- */}
-      <ImpactStatsSection />
+      {/* <ImpactStatsSection /> */}
 
       {/* --- REPORTING SECTION --- */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#1a3d2e] relative overflow-hidden">
