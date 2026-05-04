@@ -18,7 +18,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    image: "/hero6.jpg",
+    image: "/fsb.jpg",
     tag: "GOING THE EXTRA MILE",
     headline: "Caring for People\nin Need as Christ Instructed",
     description: "The 8th Mile is the missions' arm of YWAP. We help alleviate human suffering in rural communities and urban slums as instructed in Matthew 25:35-40.",
@@ -51,7 +51,7 @@ const slides: Slide[] = [
   },
   {
     id: 4,
-    image: "/hero.png",
+    image: "/5.jpg",
     tag: "PRACTICAL LOVE IN ACTION",
     headline: "Building Homes\nand Restoring Dignity",
     description: "We build habitable homes for widows and provide bibles in local languages to rural churches across Nigeria.",
@@ -112,7 +112,7 @@ export default function HeroCarousel() {
             <div className="absolute inset-0 bg-black/10" />
 
             {/* Bottom gradient for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent lg:from-black/90 lg:via-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent lg:from-black/50 lg:via-black/20" />
 
             {/* Content Container - Stacked on mobile, side by side on desktop */}
             <div className="absolute inset-0 flex flex-col lg:grid lg:grid-cols-2 lg:gap-8">

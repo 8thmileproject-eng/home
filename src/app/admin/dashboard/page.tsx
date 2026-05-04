@@ -15,9 +15,20 @@ interface DashboardStats {
   totalAmount: number;
   totalPartners: number;
   totalReports: number;
+  totalVolunteers: number;
   recentDonations: Donation[];
   recentPartners: Partner[];
   recentReports: Report[];
+  recentVolunteers: Volunteer[];
+}
+
+interface Volunteer {
+  _id: string;
+  fullName: string;
+  email: string;
+  roleTitle: string;
+  status: string;
+  createdAt: string;
 }
 
 interface Donation {
@@ -55,24 +66,28 @@ export default function AdminDashboardPage() {
   const fetchDashboardData = async () => {
     try {
       // Fetch all data in parallel
-      const [donationsRes, partnersRes, reportsRes] = await Promise.all([
+      const [donationsRes, partnersRes, reportsRes, volunteersRes] = await Promise.all([
         fetch("/api/donations"),
         fetch("/api/partners"),
         fetch("/api/reports"),
+        fetch("/api/volunteers"),
       ]);
 
       const donationsData = donationsRes.ok ? await donationsRes.json() : { donations: [], stats: { totalAmount: 0, totalDonations: 0 } };
       const partnersData = partnersRes.ok ? await partnersRes.json() : { partners: [] };
       const reportsData = reportsRes.ok ? await reportsRes.json() : { reports: [] };
+      const volunteersData = volunteersRes.ok ? await volunteersRes.json() : { volunteers: [] };
 
       setStats({
         totalDonations: donationsData.stats?.totalDonations || 0,
         totalAmount: donationsData.stats?.totalAmount || 0,
         totalPartners: partnersData.partners?.length || 0,
         totalReports: reportsData.reports?.length || 0,
+        totalVolunteers: volunteersData.volunteers?.length || 0,
         recentDonations: donationsData.donations?.slice(0, 5) || [],
         recentPartners: partnersData.partners?.slice(0, 5) || [],
         recentReports: reportsData.reports?.slice(0, 5) || [],
+        recentVolunteers: volunteersData.volunteers?.slice(0, 5) || [],
       });
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -121,7 +136,7 @@ export default function AdminDashboardPage() {
 
       {/* Stats Cards */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
           <div className="bg-white rounded-2xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-[#e8f0e8] rounded-xl flex items-center justify-center">
@@ -176,6 +191,20 @@ export default function AdminDashboardPage() {
             </div>
             <p className="text-2xl font-bold text-gray-900">{stats.totalReports}</p>
             <p className="text-sm text-gray-600">Community Reports</p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center">
+                <Users className="w-6 h-6 text-teal-600" />
+              </div>
+              <span className="flex items-center text-green-600 text-sm font-medium">
+                <ArrowUpRight className="w-4 h-4" />
+                +24%
+              </span>
+            </div>
+            <p className="text-2xl font-bold text-gray-900">{stats.totalVolunteers}</p>
+            <p className="text-sm text-gray-600">Volunteers</p>
           </div>
         </div>
       )}

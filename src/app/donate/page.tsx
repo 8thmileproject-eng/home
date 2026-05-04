@@ -138,9 +138,8 @@ export default function DonatePage() {
                         ? "/reporting"
                         : "#"
               }
-              className={`px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
-                item === "Home" ? "text-gray-600 hover:text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e]"
-              }`}
+              className={`px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full ${item === "Home" ? "text-gray-600 hover:text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e]"
+                }`}
             >
               {item}
             </a>
@@ -212,8 +211,8 @@ export default function DonatePage() {
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/hero.png" alt="Donate" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1a3d2e]/95 via-[#1a3d2e]/80 to-[#1a3d2e]/60" />
+          <Image src="/do.jpg" alt="Donate" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-gradient-to-b " />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
@@ -230,7 +229,7 @@ export default function DonatePage() {
             </h1>
 
             <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-8">
-              Every donation, no matter the size, directly impacts communities in need. 
+              Every donation, no matter the size, directly impacts communities in need.
               Join thousands of donors making a difference across Nigeria.
             </p>
 
@@ -286,7 +285,7 @@ export default function DonatePage() {
                   Choose Your Impact
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Select an amount to see the direct impact of your donation. Every contribution 
+                  Select an amount to see the direct impact of your donation. Every contribution
                   brings hope and transformation to communities in need.
                 </p>
               </div>
@@ -302,15 +301,13 @@ export default function DonatePage() {
                         setSelectedAmount(item.amount);
                         if (item.amount !== 0) setCustomAmount("");
                       }}
-                      className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left flex items-center gap-4 ${
-                        isSelected
-                          ? "border-[#2d5a3d] bg-[#e8f0e8] shadow-lg"
-                          : "border-gray-200 hover:border-[#2d5a3d]/50 hover:bg-gray-50"
-                      }`}
+                      className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left flex items-center gap-4 ${isSelected
+                        ? "border-[#2d5a3d] bg-[#e8f0e8] shadow-lg"
+                        : "border-gray-200 hover:border-[#2d5a3d]/50 hover:bg-gray-50"
+                        }`}
                     >
-                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                        isSelected ? "bg-[#2d5a3d] text-white" : "bg-gray-100 text-gray-600"
-                      }`}>
+                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${isSelected ? "bg-[#2d5a3d] text-white" : "bg-gray-100 text-gray-600"
+                        }`}>
                         <IconComponent className="w-7 h-7" />
                       </div>
                       <div className="flex-1">
@@ -353,11 +350,10 @@ export default function DonatePage() {
                       <button
                         key={freq.value}
                         onClick={() => setFrequency(freq.value)}
-                        className={`p-4 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
-                          frequency === freq.value
-                            ? "border-[#2d5a3d] bg-[#e8f0e8]"
-                            : "border-gray-200 hover:border-[#2d5a3d]/50"
-                        }`}
+                        className={`p-4 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${frequency === freq.value
+                          ? "border-[#2d5a3d] bg-[#e8f0e8]"
+                          : "border-gray-200 hover:border-[#2d5a3d]/50"
+                          }`}
                       >
                         <IconComponent className={`w-5 h-5 ${frequency === freq.value ? "text-[#2d5a3d]" : "text-gray-400"}`} />
                         <span className={`text-sm font-semibold ${frequency === freq.value ? "text-[#2d5a3d]" : "text-gray-600"}`}>
@@ -555,11 +551,10 @@ export default function DonatePage() {
                 <button
                   key={index}
                   onClick={() => setActiveTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === activeTestimonial
-                      ? "bg-[#2d5a3d] w-8"
-                      : "bg-gray-300 hover:bg-gray-400"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === activeTestimonial
+                    ? "bg-[#2d5a3d] w-8"
+                    : "bg-gray-300 hover:bg-gray-400"
+                    }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}

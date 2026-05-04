@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Lock, Mail, Eye, EyeOff, Shield } from "lucide-react";
-import { authenticateAdmin, setAdminSession } from "@/app/lib/adminAuth";
-
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -21,13 +19,19 @@ export default function AdminLoginPage() {
     setLoading(true);
 
     try {
-      const user = authenticateAdmin(email, password);
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
       
-      if (user) {
-        setAdminSession(user);
+      const data = await res.json();
+      
+      if (res.ok) {
         router.push("/admin/dashboard");
+        router.refresh();
       } else {
-        setError("Invalid email or password");
+        setError(data.error || "Invalid email or password");
       }
     } catch (err) {
       setError("An error occurred. Please try again.");

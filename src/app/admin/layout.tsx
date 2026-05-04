@@ -8,13 +8,13 @@ import {
   LayoutDashboard,
   Heart,
   Users,
+  UserPlus,
   FileText,
   Settings,
   LogOut,
   Menu,
   ChevronRight,
 } from "lucide-react";
-import { isAuthenticated, logout, getAdminUser } from "@/app/lib/adminAuth";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -24,6 +24,7 @@ const sidebarItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/admin/dashboard" },
   { icon: Heart, label: "Donations", href: "/admin/donations" },
   { icon: Users, label: "Partners", href: "/admin/partners" },
+  { icon: UserPlus, label: "Volunteers", href: "/admin/volunteers" },
   { icon: FileText, label: "Reports", href: "/admin/reports" },
   { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];
@@ -35,24 +36,34 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push("/admin/login");
-      return;
-    }
-    
-    const adminUser = getAdminUser();
-    if (adminUser) {
-      // Use setTimeout to avoid synchronous setState in effect
-      setTimeout(() => {
-        setUser(adminUser);
-      }, 0);
-    }
-  }, [router]);
+    if (pathname === "/admin/login") return;
 
-  const handleLogout = () => {
-    logout();
+    fetch("/api/auth/me")
+      .then((res) => {
+        if (!res.ok) throw new Error("Unauthorized");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.user) {
+          setUser(data.user);
+        } else {
+          router.push("/admin/login");
+        }
+      })
+      .catch(() => {
+        router.push("/admin/login");
+      });
+  }, [router, pathname]);
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
     router.push("/admin/login");
+    router.refresh();
   };
+
+  if (pathname === "/admin/login") {
+    return <>{children}</>;
+  }
 
   if (!user) {
     return (
