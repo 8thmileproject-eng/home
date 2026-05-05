@@ -5,6 +5,8 @@ import { useState } from "react";
 import { CheckCircle2, ArrowLeft, ArrowRight } from "lucide-react";
 import { volunteerRoles } from "./roles";
 import { StepSelectRole, StepRoleDetails, StepPersonalInfo, StepRoleQuestions, StepFinal } from "./WizardSteps";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const STEPS = ["Select Role", "Role Details", "Personal Info", "Role Questions", "Submit"];
 
@@ -99,38 +101,7 @@ export default function VolunteerPage() {
   return (
     <div className="relative min-h-screen font-sans bg-[#F5F5F5]">
       {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 py-2 md:py-1 flex items-center justify-between bg-white/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
-        <div className="flex items-center gap-2 md:gap-3 group cursor-pointer">
-          <div className="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
-            <Image src="/logo.svg" alt="8th Mile Project" fill className="object-contain" />
-          </div>
-        </div>
-        <nav className="hidden md:flex items-center bg-white rounded-full px-2 py-2 shadow-sm">
-          {["Home", "Projects", "Partners", "Our Faith", "Contact"].map((item) => (
-            <a key={item} href={item === "Home" ? "/" : item === "Our Faith" ? "/our-faith" : item === "Partners" ? "/partners" : item === "Projects" ? "/projects" : "#"}
-              className="px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full text-gray-600 hover:text-[#1a3d2e]">{item}</a>
-          ))}
-          <a href="/volunteer" className="px-4 lg:px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full bg-[#e8f0e8] text-[#1a3d2e]">Volunteer</a>
-        </nav>
-        <a href="/donate" className="hidden bg-white md:block px-6 lg:px-8 py-2.5 lg:py-3 text-sm font-semibold border-2 border-[#ffffff] text-[#1a3d2e] rounded-full hover:bg-[#1a3d2e] hover:text-white transition-all duration-300 shadow-sm">Donate Now</a>
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            {mobileMenuOpen ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></> : <><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></>}
-          </svg>
-        </button>
-        {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden py-4 px-4">
-            <nav className="flex flex-col gap-2">
-              {["Home", "Projects", "Partners", "Our Faith", "Volunteer", "Contact"].map((item) => (
-                <a key={item} href={item === "Home" ? "/" : item === "Our Faith" ? "/our-faith" : item === "Partners" ? "/partners" : item === "Projects" ? "/projects" : item === "Volunteer" ? "/volunteer" : "#"}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${item === "Volunteer" ? "bg-[#e8f0e8] text-[#1a3d2e]" : "text-gray-600 hover:text-[#1a3d2e] hover:bg-gray-50"}`}>{item}</a>
-              ))}
-              <a href="/donate" className="mt-2 w-full px-4 py-3 text-sm font-semibold bg-[#1a3d2e] text-white rounded-lg hover:bg-[#143324] transition-all duration-300 text-center block">Donate Now</a>
-            </nav>
-          </div>
-        )}
-      </header>
+      <Header />
 
       {/* HERO */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-4 sm:px-6 lg:px-8 bg-[#1a3d2e] overflow-hidden">
@@ -207,47 +178,7 @@ export default function VolunteerPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#0f261c] py-16 px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="relative w-12 h-12"><Image src="/logo.svg" alt="8th Mile Project" fill className="object-contain" /></div>
-                <span className="text-white font-bold text-lg">8th Mile Project</span>
-              </div>
-              <p className="text-white/60 text-sm leading-relaxed">The missions&apos; arm of YWAP, caring for people in need as instructed in Matthew 25:35-40.</p>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6">Quick Links</h4>
-              <ul className="space-y-3">
-                {[{ label: "Home", href: "/" }, { label: "About Us", href: "#" }, { label: "Our Projects", href: "/projects" }, { label: "Our Faith", href: "/our-faith" }, { label: "Contact", href: "#" }].map(l => (
-                  <li key={l.label}><a href={l.href} className="text-white/60 hover:text-white transition-colors text-sm">{l.label}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6">Our Programs</h4>
-              <ul className="space-y-3">
-                {["Medical Outreaches", "Student Support", "Back to School", "Homes for Widows", "Bible Donation"].map(p => (
-                  <li key={p}><a href="/projects" className="text-white/60 hover:text-white transition-colors text-sm">{p}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6">Contact Us</h4>
-              <ul className="space-y-3 text-white/60 text-sm">
-                <li><a href="mailto:info@the8thmileproject.org" className="hover:text-white transition-colors">info@the8thmileproject.org</a></li>
-                <li><a href="tel:+2347039550499" className="hover:text-white transition-colors">+234 703 955 0499</a></li>
-                <li>Abuja, Nigeria</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">The 8th Mile Project © 2026. All rights reserved.</p>
-            <div className="flex gap-6">{["Facebook", "Twitter", "Youtube"].map(s => <a key={s} href="#" className="text-white/40 hover:text-white transition-colors text-sm">{s}</a>)}</div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

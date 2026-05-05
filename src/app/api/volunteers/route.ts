@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "@/app/lib/mongodb";
+import { ObjectId } from "mongodb";
 import { Resend } from "resend";
+import { getActiveProject } from "@/app/lib/projectStore";
 
 const DB_NAME = "8thmileproject";
 const COLLECTION = "volunteer_applications";
@@ -68,7 +70,12 @@ export async function POST(request: NextRequest) {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
 
+    // Get the active project
+    const activeProject = await getActiveProject();
+
     const application = {
+      projectId: activeProject?._id || null,
+      projectName: activeProject?.name || null,
       roleId,
       roleTitle: roleTitle || roleId,
       fullName,
@@ -115,12 +122,18 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
 
-    const applications = await db.collection(COLLECTION).find({}).sort({ createdAt: -1 }).toArray();
+    // Support filtering by projectId
+    const { searchParams } = new URL(request.url);
+    const projectId = searchParams.get("projectId");
+    const filter: Record<string, any> = {};
+    if (projectId) filter.projectId = projectId;
+
+    const applications = await db.collection(COLLECTION).find(filter).sort({ createdAt: -1 }).toArray();
 
     const total = applications.length;
     const pending = applications.filter(a => a.status === "pending").length;
@@ -133,6 +146,34 @@ export async function GET() {
     }, { status: 200 });
   } catch (error) {
     console.error("Error fetching volunteer applications:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { id, status } = body;
+
+    if (!id || !status) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    const client = await clientPromise;
+    const db = client.db(DB_NAME);
+
+    const result = await db.collection(COLLECTION).updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { status, updatedAt: new Date() } }
+    );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json({ error: "Application not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Status updated successfully" }, { status: 200 });
+  } catch (error) {
+    console.error("Error updating volunteer application:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -28,7 +28,14 @@ export default function AdminLoginPage() {
       const data = await res.json();
       
       if (res.ok) {
-        router.push("/admin/dashboard");
+        if (data.user?.role === "super_admin") {
+          router.push("/admin/dashboard");
+        } else if (data.user?.permissions && data.user.permissions.length > 0) {
+          router.push(`/admin/${data.user.permissions[0]}`);
+        } else {
+          // If they have no permissions, let the proxy handle kicking them out
+          router.push("/admin/dashboard"); 
+        }
         router.refresh();
       } else {
         setError(data.error || "Invalid email or password");
@@ -77,7 +84,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2d5a3d] focus:border-transparent transition-all"
-                  placeholder="admin@8thmileproject.org"
+                  placeholder="admin@example.com"
                 />
               </div>
             </div>

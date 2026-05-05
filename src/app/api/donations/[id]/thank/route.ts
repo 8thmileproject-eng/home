@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { donationStore } from "@/app/lib/donationStore";
+import { markDonationThanked } from "@/app/lib/donationStore";
 
 export async function POST(
   request: NextRequest,
@@ -8,7 +8,7 @@ export async function POST(
   try {
     const { id } = await params;
     
-    const success = donationStore.markAsThanked(id);
+    const success = await markDonationThanked(id);
     
     if (!success) {
       return NextResponse.json(

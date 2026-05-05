@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { reportStore } from "@/app/lib/reportStore";
+import { addReport, getAllReports, getReportStats } from "@/app/lib/reportStore";
+import { getActiveProject } from "@/app/lib/projectStore";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,8 +15,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save report to store
-    const report = reportStore.add({
+    const activeProject = await getActiveProject();
+
+    const report = await addReport({
+      projectId: activeProject?._id || null,
+      projectName: activeProject?.name || null,
       communityName,
       location,
       reporterName,
@@ -28,7 +32,7 @@ export async function POST(request: NextRequest) {
       { 
         message: "Report submitted successfully. Thank you for helping us identify communities in need.",
         report: {
-          id: report.id,
+          id: report._id,
           communityName: report.communityName,
           createdAt: report.createdAt,
         }
@@ -44,10 +48,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const reports = reportStore.getAll();
-    const stats = reportStore.getStats();
+    const { searchParams } = new URL(request.url);
+    const projectId = searchParams.get("projectId");
+
+    const reports = await getAllReports(projectId);
+    const stats = await getReportStats(projectId);
     
     return NextResponse.json(
       { 

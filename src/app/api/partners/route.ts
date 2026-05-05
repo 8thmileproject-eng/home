@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { partnerStore } from "@/app/lib/partnerStore";
+import { addPartner, getAllPartners, getPartnerStats } from "@/app/lib/partnerStore";
+import { getActiveProject } from "@/app/lib/projectStore";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    // Validate required fields
     const { name, email, partnershipType } = body;
     
     if (!name || !email || !partnershipType) {
@@ -15,8 +15,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save partner to store
-    const partner = partnerStore.add({
+    const activeProject = await getActiveProject();
+
+    const partner = await addPartner({
+      projectId: activeProject?._id || null,
+      projectName: activeProject?.name || null,
       name,
       email,
       phone: body.phone || undefined,
@@ -29,7 +32,7 @@ export async function POST(request: NextRequest) {
       { 
         message: "Application submitted successfully",
         partner: {
-          id: partner.id,
+          id: partner._id,
           name: partner.name,
           email: partner.email,
           createdAt: partner.createdAt,
@@ -46,10 +49,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const partners = partnerStore.getAll();
-    const stats = partnerStore.getStats();
+    const { searchParams } = new URL(request.url);
+    const projectId = searchParams.get("projectId");
+
+    const partners = await getAllPartners(projectId);
+    const stats = await getPartnerStats(projectId);
     
     return NextResponse.json(
       { 

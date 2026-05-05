@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useProject } from "../layout";
 import {
   FileText,
   MapPin,
@@ -28,14 +29,17 @@ export default function AdminReportsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [markingReviewed, setMarkingReviewed] = useState<string | null>(null);
+  const { selectedProjectId } = useProject();
 
   useEffect(() => {
     fetchReports();
-  }, []);
+  }, [selectedProjectId]);
 
   const fetchReports = async () => {
+    setLoading(true);
     try {
-      const response = await fetch("/api/reports");
+      const qs = selectedProjectId ? `?projectId=${selectedProjectId}` : "";
+      const response = await fetch(`/api/reports${qs}`);
       if (!response.ok) throw new Error("Failed to fetch reports");
       
       const data = await response.json();

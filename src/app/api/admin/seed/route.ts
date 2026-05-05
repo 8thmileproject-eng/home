@@ -26,6 +26,9 @@ export async function POST(request: Request) {
       passwordHash,
       name,
       role: "super_admin",
+      permissions: ["dashboard", "donations", "partners", "volunteers", "reports", "communications", "settings"],
+      disabled: false,
+      createdAt: new Date(),
     });
 
     if (success) {

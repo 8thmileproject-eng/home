@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { partnerStore } from "@/app/lib/partnerStore";
+import { markPartnerContacted } from "@/app/lib/partnerStore";
 
 export async function POST(
   request: NextRequest,
@@ -8,7 +8,7 @@ export async function POST(
   try {
     const { id } = await params;
     
-    const success = partnerStore.markAsContacted(id);
+    const success = await markPartnerContacted(id);
     
     if (!success) {
       return NextResponse.json(

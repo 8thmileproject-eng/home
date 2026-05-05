@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useProject } from "../layout";
 import {
   Heart,
   Mail,
@@ -38,14 +39,17 @@ export default function AdminDonationsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [sendingThankYou, setSendingThankYou] = useState<string | null>(null);
+  const { selectedProjectId } = useProject();
 
   useEffect(() => {
     fetchDonations();
-  }, []);
+  }, [selectedProjectId]);
 
   const fetchDonations = async () => {
+    setLoading(true);
     try {
-      const response = await fetch("/api/donations");
+      const qs = selectedProjectId ? `?projectId=${selectedProjectId}` : "";
+      const response = await fetch(`/api/donations${qs}`);
       if (!response.ok) throw new Error("Failed to fetch donations");
       
       const data = await response.json();

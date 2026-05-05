@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { reportStore } from "@/app/lib/reportStore";
+import { markReportReviewed } from "@/app/lib/reportStore";
 
 export async function POST(
   request: NextRequest,
@@ -8,7 +8,7 @@ export async function POST(
   try {
     const { id } = await params;
     
-    const success = reportStore.markAsReviewed(id);
+    const success = await markReportReviewed(id);
     
     if (!success) {
       return NextResponse.json(

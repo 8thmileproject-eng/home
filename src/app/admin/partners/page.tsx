@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useProject } from "../layout";
 import {
   Users,
   Mail,
@@ -29,14 +30,17 @@ export default function AdminPartnersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [sendingContact, setSendingContact] = useState<string | null>(null);
+  const { selectedProjectId } = useProject();
 
   useEffect(() => {
     fetchPartners();
-  }, []);
+  }, [selectedProjectId]);
 
   const fetchPartners = async () => {
+    setLoading(true);
     try {
-      const response = await fetch("/api/partners");
+      const qs = selectedProjectId ? `?projectId=${selectedProjectId}` : "";
+      const response = await fetch(`/api/partners${qs}`);
       if (!response.ok) throw new Error("Failed to fetch partners");
       
       const data = await response.json();

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { donationStore } from "@/app/lib/donationStore";
+import { addDonation, getAllDonations, getDonationStats } from "@/app/lib/donationStore";
+import { getActiveProject } from "@/app/lib/projectStore";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,8 +15,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save donation to store
-    const donation = donationStore.add({
+    // Get the active project
+    const activeProject = await getActiveProject();
+
+    const donation = await addDonation({
+      projectId: activeProject?._id || null,
+      projectName: activeProject?.name || null,
       amount: Number(amount),
       frequency: frequency || "once",
       name,
@@ -30,7 +35,7 @@ export async function POST(request: NextRequest) {
       { 
         message: "Thank you for your generous donation! You will receive a confirmation email shortly.",
         donation: {
-          id: donation.id,
+          id: donation._id,
           amount: donation.amount,
           name: donation.name,
           email: donation.email,
@@ -48,10 +53,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const donations = donationStore.getAll();
-    const stats = donationStore.getStats();
+    const { searchParams } = new URL(request.url);
+    const projectId = searchParams.get("projectId");
+
+    const donations = await getAllDonations(projectId);
+    const stats = await getDonationStats(projectId);
     
     return NextResponse.json(
       { 

@@ -27,10 +27,11 @@ export async function POST(request: Request) {
       email: admin.email,
       name: admin.name,
       role: admin.role,
+      permissions: admin.permissions || [],
     });
 
     const response = NextResponse.json(
-      { success: true, user: { email: admin.email, name: admin.name, role: admin.role } },
+      { success: true, user: { email: admin.email, name: admin.name, role: admin.role, permissions: admin.permissions || [] } },
       { status: 200 }
     );
 
