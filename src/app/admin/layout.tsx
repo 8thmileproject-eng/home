@@ -19,6 +19,9 @@ import {
   ChevronDown,
   Check,
   Layers,
+  ClipboardList,
+  Plus,
+  List,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -65,6 +68,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [projectDropdownOpen, setProjectDropdownOpen] = useState(false);
+  const [patientRecordOpen, setPatientRecordOpen] = useState(true);
 
   useEffect(() => {
     if (pathname === "/admin/login") return;
@@ -246,6 +250,58 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   </Link>
                 );
               })}
+
+              {/* Patient Record - dropdown section */}
+              {(() => {
+                const hasAccess = user.role === "super_admin" || !!(user.permissions && user.permissions.includes("patient-record"));
+                if (!hasAccess) return null;
+
+                const isInSection = pathname.startsWith("/admin/patient-record");
+                return (
+                  <div>
+                    <button
+                      onClick={() => setPatientRecordOpen(!patientRecordOpen)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                        isInSection
+                          ? "bg-[#4ade80] text-[#1a3d2e] font-semibold"
+                          : "text-white/70 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      <ClipboardList className="w-5 h-5" />
+                      <span className="flex-1 text-left">Patient Record</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${patientRecordOpen ? "rotate-180" : ""}`} />
+                    </button>
+
+                    {patientRecordOpen && (
+                      <div className="ml-2 mt-1 space-y-0.5">
+                        {[
+                          { icon: LayoutDashboard, label: "Dashboard", href: "/admin/patient-record/dashboard" },
+                          { icon: Plus, label: "Add Record", href: "/admin/patient-record/add" },
+                          { icon: List, label: "View Record", href: "/admin/patient-record/list" },
+                        ].map((sub) => {
+                          const SubIcon = sub.icon;
+                          const isSubActive = pathname === sub.href;
+                          return (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              onClick={() => setSidebarOpen(false)}
+                              className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm ${
+                                isSubActive
+                                  ? "bg-white/20 text-white font-semibold"
+                                  : "text-white/60 hover:bg-white/10 hover:text-white"
+                              }`}
+                            >
+                              <SubIcon className="w-4 h-4" />
+                              <span>{sub.label}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </nav>
 
             {/* User Info & Logout */}
