@@ -11,6 +11,7 @@ interface Entry {
   projectId: string;
   projectName: string;
   date: string;
+  stage: string;
 
   fullName: string;
   gender: string;
@@ -57,6 +58,7 @@ export default function ViewPatientRecordsPage() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [stageFilter, setStageFilter] = useState<string>("");
   const [selected, setSelected] = useState<Entry | null>(null);
 
   useEffect(() => {
@@ -77,10 +79,12 @@ export default function ViewPatientRecordsPage() {
     load();
   }, [selectedProjectId]);
 
-  const filtered = entries.filter((e) =>
-    !search || e.fullName.toLowerCase().includes(search.toLowerCase()) ||
-    e.phoneNumber.includes(search) || e.address?.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = entries.filter((e) => {
+    if (search && !e.fullName.toLowerCase().includes(search.toLowerCase()) &&
+        !e.phoneNumber.includes(search) && !e.address?.toLowerCase().includes(search.toLowerCase())) return false;
+    if (stageFilter && e.stage !== stageFilter) return false;
+    return true;
+  });
 
   const exportCSV = () => {
     const headers = ["S/N", "Full Name", "Gender", "DOB/Age", "Phone", "Address", "Occupation", "Marital Status",
@@ -158,6 +162,20 @@ export default function ViewPatientRecordsPage() {
           )}
         </div>
 
+        {/* Stage Filter */}
+        <div className="mb-4 flex items-center gap-2 flex-wrap">
+          {["", "registration", "nursing", "doctor", "complete"].map((s) => (
+            <button key={s} onClick={() => setStageFilter(s)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                stageFilter === s
+                  ? "bg-[#2d5a3d] text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}>
+              {s ? s.charAt(0).toUpperCase() + s.slice(1) : "All"}
+            </button>
+          ))}
+        </div>
+
         {/* Export Buttons */}
         {!loading && filtered.length > 0 && (
           <div className="mb-4 flex items-center gap-2">
@@ -196,6 +214,7 @@ export default function ViewPatientRecordsPage() {
                   <tr className="border-b border-gray-100 bg-gray-50">
                     <th className="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">S/N</th>
                     <th className="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Full Name</th>
+                    <th className="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Stage</th>
                     <th className="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Gender</th>
                     <th className="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Phone</th>
                     <th className="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Date</th>
@@ -209,6 +228,17 @@ export default function ViewPatientRecordsPage() {
                     <tr key={entry._id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-5 py-4 text-sm text-gray-400">{idx + 1}</td>
                       <td className="px-5 py-4 text-sm font-semibold text-gray-900">{entry.fullName}</td>
+                      <td className="px-5 py-4">
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
+                          entry.stage === "registration" ? "bg-blue-50 text-blue-700" :
+                          entry.stage === "nursing" ? "bg-amber-50 text-amber-700" :
+                          entry.stage === "doctor" ? "bg-purple-50 text-purple-700" :
+                          entry.stage === "complete" ? "bg-green-50 text-green-700" :
+                          "bg-gray-50 text-gray-500"
+                        }`}>
+                          {entry.stage ? entry.stage.charAt(0).toUpperCase() + entry.stage.slice(1) : "-"}
+                        </span>
+                      </td>
                       <td className="px-5 py-4 text-sm text-gray-700">{entry.gender || "-"}</td>
                       <td className="px-5 py-4 text-sm text-gray-700">{entry.phoneNumber || "-"}</td>
                       <td className="px-5 py-4 text-sm text-gray-700">{entry.date || "-"}</td>

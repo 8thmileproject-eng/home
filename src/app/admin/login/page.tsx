@@ -28,13 +28,16 @@ export default function AdminLoginPage() {
       const data = await res.json();
       
       if (res.ok) {
+        const perms = data.user?.permissions || [];
+        const first = perms[0] || "";
         if (data.user?.role === "super_admin") {
           router.push("/admin/dashboard");
-        } else if (data.user?.permissions && data.user.permissions.length > 0) {
-          router.push(`/admin/${data.user.permissions[0]}`);
+        } else if (first.startsWith("patient-record-")) {
+          router.push(`/admin/patient-record/${first.replace("patient-record-", "")}`);
+        } else if (first) {
+          router.push(`/admin/${first}`);
         } else {
-          // If they have no permissions, let the proxy handle kicking them out
-          router.push("/admin/dashboard"); 
+          router.push("/admin/login");
         }
         router.refresh();
       } else {

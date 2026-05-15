@@ -1,12 +1,19 @@
 import clientPromise from "./mongodb";
 import { Db, ObjectId } from "mongodb";
 
+export interface SubRole {
+  id: string;
+  name: string;
+  permissions: string[];
+}
+
 export interface Admin {
   _id?: string;
   email: string;
   passwordHash: string;
   name: string;
   role: string;
+  subRole?: string;
   disabled: boolean;
   permissions: string[];
   createdAt: Date;
@@ -17,8 +24,25 @@ export interface AdminRole {
   _id?: string;
   name: string;
   permissions: string[];
+  subRoles?: SubRole[];
   createdAt: Date;
 }
+
+export const SUB_ROLES = [
+  { id: "data-entry", name: "Data Entry", label: "Data Entry" },
+  { id: "nurse", name: "Nurse", label: "Nurse" },
+  { id: "doctor", name: "Doctor", label: "Doctor" },
+  { id: "pharmacy", name: "Pharmacy", label: "Pharmacy" },
+  { id: "other", name: "Other", label: "Other" },
+];
+
+export const SUB_ROLE_PAGE_ACCESS: Record<string, string[]> = {
+  "data-entry": ["registration"],
+  nurse: ["nursing"],
+  doctor: ["doctor"],
+  pharmacy: [],
+  other: [],
+};
 
 export const ADMIN_PAGES = [
   { id: "dashboard", label: "Dashboard" },
@@ -48,6 +72,7 @@ export async function getAdminByEmail(email: string): Promise<Admin | null> {
     passwordHash: admin.passwordHash,
     name: admin.name,
     role: admin.role,
+    subRole: admin.subRole || undefined,
     disabled: admin.disabled || false,
     permissions: admin.permissions || [],
     createdAt: admin.createdAt,
@@ -65,6 +90,7 @@ export async function getAdminById(id: string): Promise<Admin | null> {
     passwordHash: admin.passwordHash,
     name: admin.name,
     role: admin.role,
+    subRole: admin.subRole || undefined,
     disabled: admin.disabled || false,
     permissions: admin.permissions || [],
     createdAt: admin.createdAt,
@@ -81,6 +107,7 @@ export async function getAllAdmins(): Promise<Admin[]> {
     passwordHash: a.passwordHash,
     name: a.name,
     role: a.role,
+    subRole: a.subRole || undefined,
     disabled: a.disabled || false,
     permissions: a.permissions || [],
     createdAt: a.createdAt,
@@ -125,6 +152,7 @@ export async function getAllRoles(): Promise<AdminRole[]> {
     _id: r._id.toString(),
     name: r.name,
     permissions: r.permissions || [],
+    subRoles: r.subRoles || [],
     createdAt: r.createdAt,
   }));
 }

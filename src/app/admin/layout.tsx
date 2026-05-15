@@ -24,6 +24,14 @@ import {
   List,
 } from "lucide-react";
 
+const SUB_ROLE_PAGE_ACCESS: Record<string, string[]> = {
+  "data-entry": ["registration"],
+  nurse: ["nursing"],
+  doctor: ["doctor"],
+  pharmacy: [],
+  other: [],
+};
+
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
@@ -68,7 +76,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [projectDropdownOpen, setProjectDropdownOpen] = useState(false);
-  const [patientRecordOpen, setPatientRecordOpen] = useState(true);
+  const [patientRecordOpen, setPatientRecordOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   useEffect(() => {
     if (pathname === "/admin/login") return;
@@ -123,6 +132,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }, [selectedProjectId]);
 
   const handleLogout = async () => {
+    setShowLogoutConfirm(false);
     await fetch("/api/auth/logout", { method: "POST" });
     router.push("/admin/login");
     router.refresh();
@@ -215,7 +225,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             )}
 
             {/* Navigation */}
-            <nav className="flex-1 px-4 py-6 space-y-1">
+            <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto min-h-0">
               {sidebarItems.map((item) => {
                 const pageId = item.href.split("/").pop() || "";
                 
@@ -253,8 +263,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
               {/* Patient Record - dropdown section */}
               {(() => {
-                const hasAccess = user.role === "super_admin" || !!(user.permissions && user.permissions.includes("patient-record"));
-                if (!hasAccess) return null;
+                const perms = user.permissions || [];
+                const subRole = (user as { subRole?: string }).subRole;
+                const hasPatientRecord = user.role === "super_admin" || perms.includes("patient-record") || perms.some((p: string) => p.startsWith("patient-record-"));
+                if (!hasPatientRecord) return null;
 
                 const isInSection = pathname.startsWith("/admin/patient-record");
                 return (
@@ -275,10 +287,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                     {patientRecordOpen && (
                       <div className="ml-2 mt-1 space-y-0.5">
                         {[
-                          { icon: LayoutDashboard, label: "Dashboard", href: "/admin/patient-record/dashboard" },
-                          { icon: Plus, label: "Add Record", href: "/admin/patient-record/add" },
-                          { icon: List, label: "View Record", href: "/admin/patient-record/list" },
-                        ].map((sub) => {
+                          { id: "dashboard", icon: LayoutDashboard, label: "Dashboard", href: "/admin/patient-record/dashboard" },
+                          { id: "registration", icon: Plus, label: "Registration", href: "/admin/patient-record/registration" },
+                          { id: "nursing", icon: Heart, label: "Nursing", href: "/admin/patient-record/nursing" },
+                          { id: "doctor", icon: UserPlus, label: "Doctor", href: "/admin/patient-record/doctor" },
+                          { id: "list", icon: List, label: "View Record", href: "/admin/patient-record/list" },
+                        ].filter((sub) => {
+                          if (user.role === "super_admin") return true;
+                          if (perms.includes("patient-record")) return true;
+                          if (perms.includes(`patient-record-${sub.id}`)) return true;
+                          if (subRole && (SUB_ROLE_PAGE_ACCESS[subRole] || []).includes(sub.id)) return true;
+                          return false;
+                        }).map((sub) => {
                           const SubIcon = sub.icon;
                           const isSubActive = pathname === sub.href;
                           return (
@@ -311,7 +331,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <p className="text-xs text-white/60">{user.email}</p>
               </div>
               <button
-                onClick={handleLogout}
+                onClick={() => setShowLogoutConfirm(true)}
                 className="w-full flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/10 hover:text-white rounded-xl transition-all"
               >
                 <LogOut className="w-5 h-5" />
@@ -332,7 +352,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <Menu className="w-6 h-6" />
             </button>
             <p className="font-bold text-gray-900">Admin Dashboard</p>
-            <div className="w-10" />
+            <button
+              onClick={() => setShowLogoutConfirm(true)}
+              className="p-2 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-red-600"
+              title="Logout"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
           </header>
 
           {/* Page Content */}
@@ -341,6 +367,29 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </main>
         </div>
       </div>
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black/40 z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 space-y-4">
+            <h3 className="text-lg font-bold text-gray-900">Confirm Logout</h3>
+            <p className="text-sm text-gray-600">Are you sure you want to log out?</p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setShowLogoutConfirm(false)}
+                className="px-5 py-2.5 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors font-medium text-sm"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-5 py-2.5 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-medium text-sm"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </ProjectContext.Provider>
   );
 }

@@ -8,7 +8,7 @@ const getJwtSecretKey = () => {
   return secret;
 };
 
-export const signJwt = async (payload: { email: string; name: string; role: string; permissions?: string[] }) => {
+export const signJwt = async (payload: { email: string; name: string; role: string; subRole?: string; permissions?: string[] }) => {
   try {
     const secret = new TextEncoder().encode(getJwtSecretKey());
     const alg = "HS256";
@@ -27,7 +27,7 @@ export const verifyJwt = async (token: string) => {
   try {
     const secret = new TextEncoder().encode(getJwtSecretKey());
     const { payload } = await jwtVerify(token, secret);
-    return payload as { email: string; name: string; role: string };
+    return payload as { email: string; name: string; role: string; subRole?: string; permissions?: string[] };
   } catch (error) {
     return null;
   }

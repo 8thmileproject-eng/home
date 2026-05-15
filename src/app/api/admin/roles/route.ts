@@ -17,6 +17,22 @@ function getAdminPages() {
           const label = entry.name.charAt(0).toUpperCase() + entry.name.slice(1);
           pages.push({ id: entry.name, label });
         }
+        // Scan patient-record sub-pages
+        if (entry.name === "patient-record") {
+          const prDir = path.join(adminDir, "patient-record");
+          try {
+            const prEntries = fs.readdirSync(prDir, { withFileTypes: true });
+            for (const prEntry of prEntries) {
+              if (prEntry.isDirectory()) {
+                const prPagePath = path.join(prDir, prEntry.name, "page.tsx");
+                if (fs.existsSync(prPagePath) && prEntry.name !== "add") {
+                  const label = prEntry.name.charAt(0).toUpperCase() + prEntry.name.slice(1);
+                  pages.push({ id: `patient-record-${prEntry.name}`, label: `Patient - ${label}` });
+                }
+              }
+            }
+          } catch {}
+        }
       }
     }
     

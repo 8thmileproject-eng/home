@@ -15,7 +15,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password, name, role, permissions } = await request.json();
+    const { email, password, name, role, subRole, permissions } = await request.json();
 
     if (!email || !password || !name || !role) {
       return NextResponse.json({ error: "Email, password, name and role are required" }, { status: 400 });
@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
       passwordHash,
       name,
       role,
+      subRole: subRole || undefined,
       disabled: false,
       permissions: permissions || [],
       createdAt: new Date(),

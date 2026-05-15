@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllDataEntries, insertDataEntry } from "@/app/lib/dataEntryStore";
+import type { RecordStage } from "@/app/lib/dataEntryStore";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const projectId = searchParams.get("projectId") || undefined;
-    const entries = await getAllDataEntries(projectId);
+    const stage = searchParams.get("stage") as RecordStage | null;
+    const entries = await getAllDataEntries({ projectId, stage: stage || undefined });
     return NextResponse.json({ entries }, { status: 200 });
   } catch (error) {
     console.error("Error fetching data entries:", error);
@@ -21,10 +23,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Full name is required" }, { status: 400 });
     }
 
+    const { stage: _stage, completedStages: _cs, createdAt: _ca, updatedAt: _ua, _id: _id, ...cleanBody } = body;
+
     const entryId = await insertDataEntry({
-      ...body,
+      ...cleanBody,
+      stage: "registration",
+      completedStages: {},
       date: body.date || new Date().toISOString().split("T")[0],
-      createdAt: new Date(),
     });
 
     if (entryId) {

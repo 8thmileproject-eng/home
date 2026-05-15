@@ -2,7 +2,15 @@
 import { useState, useEffect } from "react";
 import { Shield, Users, Key, Plus, Trash2, X, CheckCircle, XCircle, Eye, EyeOff, Save, UserPlus, Lock, ToggleLeft, ToggleRight } from "lucide-react";
 
-interface AdminUser { _id: string; email: string; name: string; role: string; disabled: boolean; permissions: string[]; createdAt: string; }
+interface AdminUser { _id: string; email: string; name: string; role: string; subRole?: string; disabled: boolean; permissions: string[]; createdAt: string; }
+
+const SUB_ROLES = [
+  { id: "data-entry", name: "Data Entry" },
+  { id: "nurse", name: "Nurse" },
+  { id: "doctor", name: "Doctor" },
+  { id: "pharmacy", name: "Pharmacy" },
+  { id: "other", name: "Other" },
+];
 interface Role { _id: string; name: string; permissions: string[]; }
 
 export default function SettingsPage() {
@@ -15,10 +23,11 @@ export default function SettingsPage() {
 
   // Admin form
   const [showAddAdmin, setShowAddAdmin] = useState(false);
-  const [newAdmin, setNewAdmin] = useState({name:"",email:"",password:"",role:"admin",permissions:[] as string[]});
+  const [newAdmin, setNewAdmin] = useState({name:"",email:"",password:"",role:"admin",subRole:"",permissions:[] as string[]});
   const [editingAdmin, setEditingAdmin] = useState<string|null>(null);
   const [editPerms, setEditPerms] = useState<string[]>([]);
   const [editRole, setEditRole] = useState("");
+  const [editSubRole, setEditSubRole] = useState("");
 
   // Role form
   const [showAddRole, setShowAddRole] = useState(false);
@@ -45,7 +54,7 @@ export default function SettingsPage() {
   const createAdmin = async () => {
     if (!newAdmin.name||!newAdmin.email||!newAdmin.password) { flash("Fill all fields","error"); return; }
     const res = await fetch("/api/admin/users",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(newAdmin)});
-    if (res.ok) { flash("Admin created"); setShowAddAdmin(false); setNewAdmin({name:"",email:"",password:"",role:"admin",permissions:[]}); fetchAll(); }
+    if (res.ok) { flash("Admin created"); setShowAddAdmin(false); setNewAdmin({name:"",email:"",password:"",role:"admin",subRole:"",permissions:[]}); fetchAll(); }
     else { const d=await res.json(); flash(d.error||"Failed","error"); }
   };
 
@@ -62,7 +71,7 @@ export default function SettingsPage() {
   };
 
   const saveAdminPerms = async (id:string) => {
-    const res = await fetch("/api/admin/users",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({id,permissions:editPerms,role:editRole})});
+    const res = await fetch("/api/admin/users",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({id,permissions:editPerms,role:editRole,subRole:editSubRole||undefined})});
     if (res.ok) { flash("Permissions saved"); setEditingAdmin(null); fetchAll(); } else flash("Failed","error");
   };
 
@@ -149,7 +158,7 @@ export default function SettingsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button onClick={()=>{if(editingAdmin===admin._id){setEditingAdmin(null)}else{setEditingAdmin(admin._id);setEditPerms(admin.permissions||[]);setEditRole(admin.role);}}} className="p-2 text-gray-400 hover:text-[#1a3d2e] hover:bg-gray-50 rounded-lg transition-colors" title="Edit permissions">
+                    <button onClick={()=>{if(editingAdmin===admin._id){setEditingAdmin(null)}else{setEditingAdmin(admin._id);setEditPerms(admin.permissions||[]);setEditRole(admin.role);setEditSubRole(admin.subRole||"");}}} className="p-2 text-gray-400 hover:text-[#1a3d2e] hover:bg-gray-50 rounded-lg transition-colors" title="Edit permissions">
                       <Shield className="w-4 h-4"/>
                     </button>
                     <button onClick={()=>toggleDisable(admin)} className="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors" title={admin.disabled?"Enable":"Disable"}>
@@ -172,6 +181,14 @@ export default function SettingsPage() {
                         <option value="admin">Admin</option>
                         {roles.map(r=><option key={r._id} value={r.name}>{r.name}</option>)}
                       </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Sub Role</label>
+                      <select value={editSubRole} onChange={e=>setEditSubRole(e.target.value)} className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a3d]">
+                        <option value="">None</option>
+                        {SUB_ROLES.map(sr=><option key={sr.id} value={sr.id}>{sr.name}</option>)}
+                      </select>
+                      {editSubRole && <p className="text-xs text-gray-400 mt-1">Limits patient record page access</p>}
                     </div>
                     <div>
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Page Access</label>
@@ -221,6 +238,13 @@ export default function SettingsPage() {
                       <select value={newAdmin.role} onChange={e=>setNewAdmin({...newAdmin,role:e.target.value})} className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a3d]">
                         <option value="admin">Admin</option>
                         {roles.map(r=><option key={r._id} value={r.name}>{r.name}</option>)}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-gray-500 uppercase">Sub Role</label>
+                      <select value={newAdmin.subRole} onChange={e=>setNewAdmin({...newAdmin,subRole:e.target.value})} className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a3d]">
+                        <option value="">None</option>
+                        {SUB_ROLES.map(sr=><option key={sr.id} value={sr.id}>{sr.name}</option>)}
                       </select>
                     </div>
                     <div>

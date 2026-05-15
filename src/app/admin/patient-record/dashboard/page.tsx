@@ -10,6 +10,10 @@ interface DashboardStats {
   male: number;
   female: number;
   referred: number;
+  registration: number;
+  nursing: number;
+  doctor: number;
+  complete: number;
 }
 
 interface Entry {
@@ -17,6 +21,7 @@ interface Entry {
   fullName: string;
   gender: string;
   date: string;
+  stage: string;
   phoneNumber: string;
   dateOfBirth: string;
   address: string;
@@ -31,7 +36,7 @@ interface Entry {
 
 export default function PatientDashboardPage() {
   const { selectedProjectId, selectedProjectName } = useProject();
-  const [stats, setStats] = useState<DashboardStats>({ total: 0, today: 0, male: 0, female: 0, referred: 0 });
+  const [stats, setStats] = useState<DashboardStats>({ total: 0, today: 0, male: 0, female: 0, referred: 0, registration: 0, nursing: 0, doctor: 0, complete: 0 });
   const [recent, setRecent] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +56,10 @@ export default function PatientDashboardPage() {
             male: entries.filter((e) => e.gender === "Male").length,
             female: entries.filter((e) => e.gender === "Female").length,
             referred: entries.filter((e) => e.referredTo).length,
+            registration: entries.filter((e) => e.stage === "registration").length,
+            nursing: entries.filter((e) => e.stage === "nursing").length,
+            doctor: entries.filter((e) => e.stage === "doctor").length,
+            complete: entries.filter((e) => e.stage === "complete").length,
           });
           setRecent(entries.slice(0, 5));
         }
@@ -103,6 +112,21 @@ export default function PatientDashboardPage() {
             </div>
           );
         })}
+      </div>
+
+      {/* Pipeline */}
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        {[
+          { label: "Registration", value: stats.registration, color: "bg-blue-50 text-blue-600" },
+          { label: "Nursing", value: stats.nursing, color: "bg-amber-50 text-amber-600" },
+          { label: "Doctor", value: stats.doctor, color: "bg-purple-50 text-purple-600" },
+          { label: "Complete", value: stats.complete, color: "bg-green-50 text-green-600" },
+        ].map((s) => (
+          <div key={s.label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 text-center">
+            <p className="text-2xl font-bold text-gray-900">{s.value}</p>
+            <p className="text-xs text-gray-500">{s.label}</p>
+          </div>
+        ))}
       </div>
 
       {stats.referred > 0 && (
