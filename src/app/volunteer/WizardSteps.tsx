@@ -43,9 +43,18 @@ function DynamicField({ q, value, onChange, error }: { q: CustomQuestion; value:
 }
 
 const roleIcons: Record<string, string> = {
-  "communications-manager": "📢", "volunteer-nurse": "🩺", "volunteer-doctor": "⚕️",
-  "volunteer-media": "🎬", "volunteer-logistics": "📦", "volunteer-counsellor": "🧠", "general-volunteer": "🤝",
-  "lead-outreach": "🤝", "lead-relief": "🍚", "lead-volunteer-management": "📋", "lead-safeguarding": "🛡️"
+  "medical-unit": "🩺",
+  "relief-and-welfare": "🍚",
+  "education-and-school": "📚",
+  "volunteers-management": "📋",
+  "prayerroom": "🙏",
+  "partnership-and-resource": "🤝",
+  "monitoring-and-evaluation": "📊",
+  "media-and-communications": "📢",
+  "operations-and-logistics": "📦",
+  "finance-unit": "💰",
+  "admin-unit": "🏢",
+  "safeguarding-and-ethics": "🛡️",
 };
 
 // Step 0

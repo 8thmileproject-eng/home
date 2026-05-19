@@ -20,233 +20,352 @@ export interface VolunteerRole {
 
 export const volunteerRoles: VolunteerRole[] = [
   {
-    id: "communications-manager",
-    title: "Volunteer Communications Manager",
-    about: "The Volunteer Communications Manager will lead the development and execution of communication strategies to promote our work, engage audiences, and amplify our impact. We are seeking a passionate and skilled individual to support the 8thMile mission by strengthening our visibility, storytelling, and stakeholder engagement.",
+    id: "medical-unit",
+    title: "Medical Unit",
+    about: "We welcome qualified healthcare professionals and students to join our medical outreaches. You will provide direct patient care, health education, and support to underserved communities.",
     responsibilities: [
-      "Develop and implement a communications strategy",
-      "Manage social media platforms and digital presence",
-      "Create engaging content (articles, posts, newsletters, reports)",
-      "Document activities through photos, videos, and storytelling",
-      "Support branding and visibility of projects",
-      "Liaise with partners and stakeholders on communication needs",
-      "Assist in producing reports and communication materials"
+      "Conduct basic health assessments and triage patients",
+      "Administer treatments under proper supervision",
+      "Provide health education on hygiene and disease prevention",
+      "Maintain accurate patient records during outreaches"
     ],
     requirements: [
-      "Background in Communications, Media, Public Relations, or related field",
-      "Strong writing and editing skills",
-      "Experience managing social media platforms",
-      "Basic graphic design skills (e.g., Canva) is an advantage",
-      "Ability to work independently and meet deadlines",
-      "Passion for social impact and community development"
+      "Medical/Nursing license or currently enrolled in a healthcare program",
+      "Basic clinical knowledge and patient care skills",
+      "Ability to work in challenging, low-resource environments",
+      "Strong interpersonal skills and empathy"
     ],
-    commitment: ["Remote/Hybrid (depending on location)", "Estimated time: 8–12 hours per week", "Duration: 3–6 months, renewable"],
-    gains: ["Hands-on experience in nonprofit communications", "Opportunity to contribute to impactful programs", "Professional development and networking opportunities", "Certificate of service upon successful completion"],
+    commitment: ["On-site (Outreach locations)", "1-3 days per month during outreach weekends", "Duration: Flexible, ongoing"],
+    gains: [
+      "Direct impact on vulnerable populations' health",
+      "Clinical experience in global health settings",
+      "Mentorship from experienced healthcare professionals",
+      "Certificate of service and recommendation"
+    ],
     customQuestions: [
-      { id: "hasCommsExperience", type: "radio", label: "Do you have experience in communications, media, or related fields? *", options: ["Yes", "No"], required: true },
-      { id: "commsTools", type: "text", label: "List any tools you are proficient in (e.g., Canva, Adobe Suite, social media platforms)", placeholder: "Canva, Instagram, Mailchimp...", required: false },
-      { id: "writingSkills", type: "select", label: "How would you rate your writing skills? *", options: ["Beginner", "Intermediate", "Advanced"], required: true },
-      { id: "socialMediaSkills", type: "select", label: "How would you rate your social media management skills? *", options: ["Beginner", "Intermediate", "Advanced"], required: true }
-    ]
-  },
-
-  // {
-  //   id: "volunteer-nurse",
-  //   title: "Volunteer Nurse",
-  //   about: "We welcome both qualified nurses and nursing students to join our rural medical outreaches. You will provide direct patient care, health education, and support to underserved communities. Students will work under the supervision of licensed professionals and gain invaluable hands-on clinical experience.",
-  //   responsibilities: ["Conduct basic health assessments and triage patients", "Administer medications and treatments under physician supervision", "Provide health education on hygiene, nutrition, and disease prevention", "Assist with mobile clinic setup and patient flow", "Maintain accurate patient records"],
-  //   requirements: ["Nursing license (RN or equivalent) OR currently enrolled in a nursing program", "Basic clinical knowledge and patient care skills", "Ability to work in challenging, low-resource environments", "Strong communication and interpersonal skills", "Willingness to travel to rural communities"],
-  //   commitment: ["On-site (Rural Communities)", "Available for weekend outreaches (1–3 days per month)", "Duration: Flexible, ongoing"],
-  //   gains: ["Direct impact on the health and well-being of vulnerable populations", "Clinical experience in global health / resource-limited settings", "Mentorship from licensed healthcare professionals", "Certificate of service and letter of recommendation"],
-  //   customQuestions: [
-  //     { id: "nurseStatus", type: "select", label: "What is your current professional status? *", options: ["Licensed / Registered Nurse", "Nursing Student (clinical year)", "Nursing Student (pre-clinical)", "Recently Graduated (awaiting license)"], required: true },
-  //     { id: "licenseNumber", type: "text", label: "Nursing License Number (if applicable)", placeholder: "e.g. RN12345678 — leave blank if still a student", required: false },
-  //     { id: "clinicalExperienceYears", type: "select", label: "Clinical experience *", options: ["No clinical experience yet", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"], required: true },
-  //     { id: "hasRuralExperience", type: "radio", label: "Have you worked in a rural or low-resource setting before?", options: ["Yes", "No"], required: false }
-  //   ]
-  // },
-  // {
-  //   id: "volunteer-doctor",
-  //   title: "Volunteer Doctor",
-  //   about: "We welcome qualified physicians as well as medical students to join our outreach teams. Licensed doctors will lead consultations and clinical decisions, while medical students will assist under supervision — gaining real-world experience in community health and tropical medicine.",
-  //   responsibilities: ["Provide medical consultations and diagnoses in mobile clinic settings", "Prescribe appropriate medications and treatments (licensed doctors)", "Assist senior physicians and support patient flow (students)", "Refer complex cases to secondary or tertiary care facilities", "Supervise and guide nurses and other medical volunteers (licensed doctors)"],
-  //   requirements: ["Medical degree (MD, DO, MBBS or equivalent) OR currently enrolled in medical school", "Ability to make or support clinical decisions in low-resource environments", "Strong leadership and teamwork skills", "Willingness to travel to remote locations"],
-  //   commitment: ["On-site (Rural Communities)", "Available for weekend outreaches (1–3 days per month)", "Duration: Flexible, ongoing"],
-  //   gains: ["Opportunity to save lives and make a tangible difference", "Experience in tropical medicine and resource-limited clinical care", "Leadership opportunities within the medical outreach team", "Certificate of service and formal recognition"],
-  //   customQuestions: [
-  //     { id: "doctorStatus", type: "select", label: "What is your current professional status? *", options: ["Licensed Physician", "Medical Resident / House Officer", "Medical Student (clinical year)", "Medical Student (pre-clinical)", "Recently Graduated (awaiting license)"], required: true },
-  //     { id: "medicalLicense", type: "text", label: "Medical License / Registration Number (if applicable)", placeholder: "e.g. MD98765432 — leave blank if still a student", required: false },
-  //     { id: "specialty", type: "text", label: "Specialty or Area of Interest", placeholder: "e.g. General Practice, Pediatrics, Surgery, Public Health", required: false },
-  //     { id: "doctorExperienceYears", type: "select", label: "Clinical experience *", options: ["No clinical experience yet", "Less than 1 year", "1–3 years", "3–5 years", "5–10 years", "10+ years"], required: true }
-  //   ]
-  // },
-  // {
-  //   id: "volunteer-media",
-  //   title: "Volunteer Media & Content Creator",
-  //   about: "Help us tell the story of our impact through photos, videos, and digital content. We are looking for photographers, videographers, graphic designers, and content creators to document outreaches and amplify our mission across digital platforms.",
-  //   responsibilities: ["Capture photos and videos during outreaches and events", "Edit and produce short-form and long-form video content", "Design graphics for social media, reports, and campaigns", "Support the creation of newsletters and impact reports", "Maintain a media library of project documentation"],
-  //   requirements: ["Experience with photography, videography, or graphic design", "Proficiency in relevant tools (e.g., Adobe Suite, Final Cut, DaVinci Resolve, Canva)", "Creative eye for storytelling and visual communication", "Own equipment is a plus but not mandatory", "Passion for social impact and community work"],
-  //   commitment: ["Hybrid (on-site during outreaches, remote for editing)", "Estimated time: 5–10 hours per week", "Duration: Flexible, project-based or ongoing"],
-  //   gains: ["Build a professional portfolio with real-world nonprofit content", "Hands-on experience in impact storytelling", "Networking with other creatives and media professionals", "Certificate of service upon successful completion"],
-  //   customQuestions: [
-  //     { id: "mediaSpecialty", type: "select", label: "What is your primary area of interest? *", options: ["Photography", "Videography", "Graphic Design", "Content Writing", "Social Media Management", "Multiple / All of the above"], required: true },
-  //     { id: "mediaTools", type: "text", label: "What tools or software are you proficient in?", placeholder: "e.g. Adobe Premiere, Lightroom, Canva, Final Cut Pro...", required: false },
-  //     { id: "hasEquipment", type: "radio", label: "Do you have your own equipment (camera, laptop, etc.)?", options: ["Yes", "No", "Some"], required: false },
-  //     { id: "portfolioLink", type: "text", label: "Link to your portfolio or sample work (if available)", placeholder: "https://...", required: false }
-  //   ]
-  // },
-  // {
-  //   id: "volunteer-logistics",
-  //   title: "Volunteer Logistics & Operations",
-  //   about: "Our outreaches require careful planning and execution on the ground. We need organised and dependable individuals to help with transportation coordination, supplies management, venue setup, and general operations during field activities.",
-  //   responsibilities: ["Coordinate transportation and logistics for outreach teams", "Manage inventory of supplies, equipment, and donations", "Assist with venue and site preparation before events", "Support crowd management and registration during outreaches", "Handle procurement and distribution of materials"],
-  //   requirements: ["Strong organisational and problem-solving skills", "Ability to work under pressure and adapt quickly", "Reliable, punctual, and detail-oriented", "Comfortable with physical tasks (loading, setup, etc.)", "Valid driver's license is an advantage but not required"],
-  //   commitment: ["On-site (event locations and communities)", "Available for outreach weekends (1–3 days per month)", "Duration: Flexible, ongoing"],
-  //   gains: ["Hands-on event management and operations experience", "Leadership and coordination skills development", "Opportunity to see the direct impact of your work on communities", "Certificate of service and letter of recommendation"],
-  //   customQuestions: [
-  //     { id: "logisticsExperience", type: "radio", label: "Do you have experience in event planning, logistics, or operations? *", options: ["Yes", "No"], required: true },
-  //     { id: "hasDriversLicense", type: "radio", label: "Do you have a valid driver's license?", options: ["Yes", "No"], required: false },
-  //     { id: "physicallyFit", type: "radio", label: "Are you comfortable with physical tasks (lifting supplies, setting up venues, etc.)? *", options: ["Yes", "No"], required: true },
-  //     { id: "logisticsSkills", type: "text", label: "Describe any relevant skills or experience", placeholder: "e.g. supply chain, warehouse management, event coordination...", required: false }
-  //   ]
-  // },
-  // {
-  //   id: "volunteer-counsellor",
-  //   title: "Volunteer Counsellor",
-  //   about: "Provide emotional support, mental health awareness, and counselling services to community members during and after outreaches. We welcome licensed counsellors, psychologists, social workers, and students in related fields who are passionate about mental health and community well-being.",
-  //   responsibilities: ["Provide one-on-one and group counselling during outreaches", "Conduct mental health awareness sessions in communities", "Offer emotional first aid and trauma-informed support", "Refer individuals to professional services when needed", "Support team well-being and provide debriefing after outreaches"],
-  //   requirements: ["Background in Counselling, Psychology, Social Work, or related field (degree or currently studying)", "Strong active listening and empathy skills", "Ability to maintain confidentiality and professional boundaries", "Cultural sensitivity and awareness", "Willingness to work in rural and underserved communities"],
-  //   commitment: ["On-site during outreaches, with remote support options", "Available for weekend outreaches (1–3 days per month)", "Duration: Flexible, ongoing"],
-  //   gains: ["Practical counselling experience in community settings", "Exposure to diverse populations and mental health challenges", "Professional development and supervised practice hours", "Certificate of service and letter of recommendation"],
-  //   customQuestions: [
-  //     { id: "counsellingStatus", type: "select", label: "What is your current professional status? *", options: ["Licensed Counsellor / Psychologist", "Social Worker", "Student (Counselling / Psychology / Social Work)", "Recently Graduated", "Other related background"], required: true },
-  //     { id: "counsellingLicense", type: "text", label: "License or Registration Number (if applicable)", placeholder: "Leave blank if still a student", required: false },
-  //     { id: "counsellingExperience", type: "select", label: "Counselling experience *", options: ["No formal experience yet", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"], required: true },
-  //     { id: "counsellingAreas", type: "text", label: "Areas of interest or specialisation", placeholder: "e.g. Trauma, Grief, Youth counselling, Family therapy...", required: false }
-  //   ]
-  // },
-  // {
-  //   id: "general-volunteer",
-  //   title: "General Volunteer",
-  //   about: "Don't see a specific role that fits? No problem! We always need extra hands during outreaches. Whether it's helping with registration, distributing items, setting up, interacting with community members, or any other task — every contribution counts. No special qualifications needed, just a willing heart.",
-  //   responsibilities: ["Assist with registration and crowd management during outreaches", "Help distribute food, clothing, medical supplies, and other items", "Support setup and teardown of outreach venues", "Engage with community members and provide general assistance", "Any other tasks as directed by the team leads"],
-  //   requirements: ["No specific qualifications required", "Positive attitude and willingness to help", "Ability to follow instructions and work as part of a team", "Physically able to participate in on-site activities", "Passion for community service"],
-  //   commitment: ["On-site (outreach locations)", "Flexible — join for as many outreaches as you can", "Duration: Open, no minimum commitment"],
-  //   gains: ["Be part of a team making a real difference in people's lives", "Meet like-minded individuals passionate about service", "Gain experience in nonprofit and community development work", "Certificate of service upon request"],
-  //   customQuestions: [
-  //     { id: "areasOfInterest", type: "select", label: "Which area interests you most? *", options: ["Medical outreaches", "Education & back-to-school programs", "Community building & welfare", "Anything — I'm happy to help wherever needed"], required: true },
-  //     { id: "specialSkills", type: "textarea", label: "Do you have any skills or experience you'd like to share?", placeholder: "e.g. first aid training, teaching, cooking, driving, languages spoken... or just tell us about yourself!", required: false },
-  //     { id: "heardAboutUs", type: "select", label: "How did you hear about The 8th Mile Project?", options: ["Social Media", "Friend / Family", "Church / YWAP", "Website", "Event / Outreach", "Other"], required: false }
-  //   ]
-  // },
-
-
-
-  {
-    id: "lead-outreach",
-    title: "Outreach & Community Engagement Unit Lead",
-    about: "We are seeking committed and value-driven individuals to serve as Volunteer Unit Leads in key functional areas. These roles are critical to strengthening programme delivery, accountability, and community impact. The Outreach & Community Engagement Lead will design and coordinate outreach programmes, build partnerships with community stakeholders, and lead awareness and mobilization campaigns.",
-    responsibilities: [
-      "Design and coordinate outreach programmes",
-      "Build partnerships with community stakeholders",
-      "Lead awareness and mobilization campaigns"
-    ],
-    requirements: [
-      "Relevant experience in the selected unit",
-      "Strong leadership and coordination skills",
-      "Commitment to humanitarian/development values",
-      "Ability to work collaboratively in a volunteer-driven environment"
-    ],
-    commitment: ["Duration: 6–12 months", "Estimated time: 5–10 hours per week", "Mode: Remote/Hybrid"],
-    gains: ["Leadership experience in a growing NGO", "Opportunity to drive strategic community impact", "Professional development and networking", "Certificate of service and formal recognition"],
-    customQuestions: [
-      { id: "yearsExperience", type: "select", label: "Years of Relevant Experience *", options: ["0–1 years", "2–3 years", "4–5 years", "6+ years"], required: true },
-      { id: "experienceDescription", type: "textarea", label: "Briefly describe your relevant experience for this role (Max 300 words) *", placeholder: "Your experience...", required: true },
-      { id: "technicalSkills", type: "textarea", label: "List key skills relevant to the role (e.g., data analysis, community mobilization, safeguarding, HR management) *", placeholder: "Your skills...", required: true },
-      { id: "toolsFamiliarity", type: "textarea", label: "What tools or systems are you familiar with? (e.g., Excel, KoboToolbox, DHIS2, CRM tools, etc.) *", placeholder: "Your tools...", required: true },
-      { id: "leadershipSituation", type: "textarea", label: "Describe a situation where you led a team or project successfully *", placeholder: "Your leadership experience...", required: true },
-      { id: "conflictResolution", type: "textarea", label: "How do you handle challenges or conflict within a team? *", placeholder: "Your approach to conflict...", required: true },
-      { id: "roleSpecificOutreach", type: "textarea", label: "Describe your experience engaging communities or stakeholders *", placeholder: "Your specific outreach experience...", required: true }
+      { id: "medicalStatus", type: "select", label: "What is your current professional status? *", options: ["Licensed Physician", "Licensed / Registered Nurse", "Medical/Nursing Student", "Recently Graduated", "Other Healthcare Professional"], required: true },
+      { id: "licenseNumber", type: "text", label: "License / Registration Number (if applicable)", placeholder: "Leave blank if still a student", required: false },
+      { id: "clinicalExperience", type: "select", label: "Years of clinical experience *", options: ["No clinical experience yet", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"], required: true },
+      { id: "hasRuralExperience", type: "radio", label: "Have you worked in a rural or low-resource setting before? *", options: ["Yes", "No"], required: true }
     ]
   },
   {
-    id: "lead-relief",
-    title: "Relief and Welfare Unit Lead",
-    about: "We are seeking committed and value-driven individuals to serve as Volunteer Unit Leads in key functional areas. These roles are critical to strengthening programme delivery, accountability, and community impact. The Relief and Welfare Unit Lead will coordinate sourcing, procurement, storage, and distribution of relief materials such as fortified food for children, grains, and clothing.",
+    id: "relief-and-welfare",
+    title: "Relief and welfare unit",
+    about: "The Relief and Welfare unit coordinates the sourcing, storage, and distribution of vital relief materials. We ensure that fortified food, clothing, and everyday essentials reach those who need them most.",
     responsibilities: [
-      "Coordinate sourcing or procurement and storage of relief materials such as Fortified food for children, grains, clothing and any other relevant relief materials",
-      "Coordinate distribution of fortified food for Children, grains to households and clothing to individuals"
+      "Coordinate sourcing and storage of relief materials",
+      "Organize the distribution of food, grains, and clothing",
+      "Assess household and individual welfare needs on-ground",
+      "Maintain inventory records and distribution logs"
     ],
     requirements: [
-      "Relevant experience in the selected unit",
-      "Strong leadership and coordination skills",
-      "Commitment to humanitarian/development values",
-      "Ability to work collaboratively in a volunteer-driven environment"
+      "Strong organizational and teamwork skills",
+      "Comfortable with physical tasks (lifting, packing)",
+      "Empathy and a respectful approach to beneficiaries",
+      "Ability to adapt quickly in dynamic environments"
     ],
-    commitment: ["Duration: 6–12 months", "Estimated time: 5–10 hours per week", "Mode: Remote/Hybrid"],
-    gains: ["Leadership experience in a growing NGO", "Opportunity to drive strategic community impact", "Professional development and networking", "Certificate of service and formal recognition"],
+    commitment: ["On-site and Hybrid", "Estimated time: 5–10 hours per week", "Available for weekend distributions"],
+    gains: [
+      "Hands-on experience in humanitarian relief operations",
+      "Direct engagement with communities",
+      "Logistics and inventory management skills",
+      "Certificate of service"
+    ],
     customQuestions: [
-      { id: "yearsExperience", type: "select", label: "Years of Relevant Experience *", options: ["0–1 years", "2–3 years", "4–5 years", "6+ years"], required: true },
-      { id: "experienceDescription", type: "textarea", label: "Briefly describe your relevant experience for this role (Max 300 words) *", placeholder: "Your experience...", required: true },
-      { id: "technicalSkills", type: "textarea", label: "List key skills relevant to the role (e.g., data analysis, community mobilization, safeguarding, HR management) *", placeholder: "Your skills...", required: true },
-      { id: "toolsFamiliarity", type: "textarea", label: "What tools or systems are you familiar with? (e.g., Excel, KoboToolbox, DHIS2, CRM tools, etc.) *", placeholder: "Your tools...", required: true },
-      { id: "leadershipSituation", type: "textarea", label: "Describe a situation where you led a team or project successfully *", placeholder: "Your leadership experience...", required: true },
-      { id: "conflictResolution", type: "textarea", label: "How do you handle challenges or conflict within a team? *", placeholder: "Your approach to conflict...", required: true },
-      { id: "roleSpecificRelief", type: "textarea", label: "Describe your experience coordinating relief materials or logistics *", placeholder: "Your specific relief coordination experience...", required: true }
+      { id: "reliefExperience", type: "radio", label: "Do you have prior experience in relief distribution or community welfare? *", options: ["Yes", "No"], required: true },
+      { id: "physicallyFit", type: "radio", label: "Are you comfortable with physical tasks such as packing boxes and lifting supplies? *", options: ["Yes", "No"], required: true },
+      { id: "logisticsSkills", type: "textarea", label: "Describe any skills you have related to inventory, logistics, or crowd control", placeholder: "Your skills...", required: false }
     ]
   },
   {
-    id: "lead-volunteer-management",
-    title: "Volunteer Management Unit Lead",
-    about: "We are seeking committed and value-driven individuals to serve as Volunteer Unit Leads in key functional areas. These roles are critical to strengthening programme delivery, accountability, and community impact. The Volunteer Management Unit Lead will recruit, onboard, and support volunteers, develop volunteer policies and engagement strategies, and track volunteer performance and retention.",
+    id: "education-and-school",
+    title: "Education and School support",
+    about: "Our Education unit focuses on improving access to quality learning. We support schools, run back-to-school drives, and provide direct tutoring and mentorship to students in marginalized communities.",
     responsibilities: [
-      "Recruit, onboard, and support volunteers",
-      "Develop volunteer policies and engagement strategies",
-      "Track volunteer performance and retention"
+      "Provide tutoring, literacy support, and mentoring to students",
+      "Assist in distributing school supplies and educational materials",
+      "Help organize and facilitate educational workshops and camps",
+      "Support local teachers with resources and classroom activities"
     ],
     requirements: [
-      "Relevant experience in the selected unit",
-      "Strong leadership and coordination skills",
-      "Commitment to humanitarian/development values",
-      "Ability to work collaboratively in a volunteer-driven environment"
+      "Passion for education and youth development",
+      "Patience, creativity, and excellent communication skills",
+      "Background in education, child psychology, or tutoring is an advantage",
+      "Ability to engage with children of varying ages"
     ],
-    commitment: ["Duration: 6–12 months", "Estimated time: 5–10 hours per week", "Mode: Remote/Hybrid"],
-    gains: ["Leadership experience in a growing NGO", "Opportunity to drive strategic community impact", "Professional development and networking", "Certificate of service and formal recognition"],
+    commitment: ["Hybrid (Schools and remote prep)", "Estimated time: 4–8 hours per week", "Duration: Minimum 3 months"],
+    gains: [
+      "Impacting the future of children through education",
+      "Developing teaching and facilitation skills",
+      "Experience in youth mentorship and program design",
+      "Certificate of service"
+    ],
     customQuestions: [
-      { id: "yearsExperience", type: "select", label: "Years of Relevant Experience *", options: ["0–1 years", "2–3 years", "4–5 years", "6+ years"], required: true },
-      { id: "experienceDescription", type: "textarea", label: "Briefly describe your relevant experience for this role (Max 300 words) *", placeholder: "Your experience...", required: true },
-      { id: "technicalSkills", type: "textarea", label: "List key skills relevant to the role (e.g., data analysis, community mobilization, safeguarding, HR management) *", placeholder: "Your skills...", required: true },
-      { id: "toolsFamiliarity", type: "textarea", label: "What tools or systems are you familiar with? (e.g., Excel, KoboToolbox, DHIS2, CRM tools, etc.) *", placeholder: "Your tools...", required: true },
-      { id: "leadershipSituation", type: "textarea", label: "Describe a situation where you led a team or project successfully *", placeholder: "Your leadership experience...", required: true },
-      { id: "conflictResolution", type: "textarea", label: "How do you handle challenges or conflict within a team? *", placeholder: "Your approach to conflict...", required: true },
-      { id: "roleSpecificVolunteer", type: "textarea", label: "Describe your experience managing or coordinating volunteers *", placeholder: "Your specific volunteer management experience...", required: true }
+      { id: "teachingExperience", type: "select", label: "What is your level of teaching or tutoring experience? *", options: ["None", "Beginner (informal tutoring)", "Intermediate (1-2 years)", "Advanced (Professional Teacher/Educator)"], required: true },
+      { id: "preferredAgeGroup", type: "select", label: "Which age group do you prefer to work with? *", options: ["Early Childhood (Ages 3-5)", "Primary (Ages 6-11)", "Secondary (Ages 12-17)", "Any age group"], required: true },
+      { id: "subjectExpertise", type: "text", label: "Are there specific subjects you excel at teaching?", placeholder: "e.g., Mathematics, English, Sciences...", required: false }
     ]
   },
   {
-    id: "lead-safeguarding",
-    title: "Safeguarding & Ethics Unit Lead",
-    about: "We are seeking committed and value-driven individuals to serve as Volunteer Unit Leads in key functional areas. These roles are critical to strengthening programme delivery, accountability, and community impact. The Safeguarding & Ethics Unit Lead will ensure safeguarding policies are implemented, handle ethical concerns and reporting mechanisms, and train staff/volunteers on safeguarding standards.",
+    id: "volunteers-management",
+    title: "Volunteers management Unit",
+    about: "Volunteers are the heartbeat of our organization. This unit manages the volunteer lifecycle—recruiting, onboarding, training, and retaining the passionate individuals who drive our mission forward.",
     responsibilities: [
-      "Ensure safeguarding policies are implemented",
-      "Handle ethical concerns and reporting mechanisms",
-      "Train staff/volunteers on safeguarding standards"
+      "Lead recruitment campaigns and review volunteer applications",
+      "Conduct onboarding sessions and orientations",
+      "Track volunteer engagement, hours, and performance",
+      "Organize volunteer appreciation events and welfare initiatives"
     ],
     requirements: [
-      "Relevant experience in the selected unit",
-      "Strong leadership and coordination skills",
-      "Commitment to humanitarian/development values",
-      "Ability to work collaboratively in a volunteer-driven environment"
+      "Strong background in HR, administration, or team management",
+      "Excellent interpersonal and conflict resolution skills",
+      "Highly organized and detail-oriented",
+      "Ability to motivate and inspire teams"
     ],
-    commitment: ["Duration: 6–12 months", "Estimated time: 5–10 hours per week", "Mode: Remote/Hybrid"],
-    gains: ["Leadership experience in a growing NGO", "Opportunity to drive strategic community impact", "Professional development and networking", "Certificate of service and formal recognition"],
+    commitment: ["Remote/Hybrid", "Estimated time: 8–10 hours per week", "Duration: Minimum 6 months"],
+    gains: [
+      "High-level experience in HR and talent management",
+      "Leadership and organizational development",
+      "Networking across all units of the organization",
+      "Certificate of service"
+    ],
     customQuestions: [
-      { id: "yearsExperience", type: "select", label: "Years of Relevant Experience *", options: ["0–1 years", "2–3 years", "4–5 years", "6+ years"], required: true },
-      { id: "experienceDescription", type: "textarea", label: "Briefly describe your relevant experience for this role (Max 300 words) *", placeholder: "Your experience...", required: true },
-      { id: "technicalSkills", type: "textarea", label: "List key skills relevant to the role (e.g., data analysis, community mobilization, safeguarding, HR management) *", placeholder: "Your skills...", required: true },
-      { id: "toolsFamiliarity", type: "textarea", label: "What tools or systems are you familiar with? (e.g., Excel, KoboToolbox, DHIS2, CRM tools, etc.) *", placeholder: "Your tools...", required: true },
-      { id: "leadershipSituation", type: "textarea", label: "Describe a situation where you led a team or project successfully *", placeholder: "Your leadership experience...", required: true },
-      { id: "conflictResolution", type: "textarea", label: "How do you handle challenges or conflict within a team? *", placeholder: "Your approach to conflict...", required: true },
-      { id: "roleSpecificSafeguarding", type: "textarea", label: "Describe your experience with safeguarding, ethics, or compliance *", placeholder: "Your specific safeguarding experience...", required: true }
+      { id: "hrExperience", type: "radio", label: "Do you have formal experience in Human Resources or Volunteer Management? *", options: ["Yes", "No"], required: true },
+      { id: "managementYears", type: "select", label: "Years of team management experience *", options: ["None", "0–1 years", "2–3 years", "4+ years"], required: true },
+      { id: "conflictResolution", type: "textarea", label: "Briefly describe how you would handle an unengaged or difficult volunteer *", placeholder: "Your approach...", required: true }
+    ]
+  },
+  {
+    id: "prayerroom",
+    title: "Prayerroom",
+    about: "The Prayerroom provides the spiritual foundation for our work. This unit offers intercessory prayer, spiritual support, and counseling for both our team members and the communities we serve.",
+    responsibilities: [
+      "Organize and lead regular prayer sessions for the organization's goals",
+      "Provide spiritual guidance and a listening ear to volunteers and beneficiaries",
+      "Maintain a prayer request log and follow up on spiritual needs",
+      "Support the pastoral care aspect of community outreaches"
+    ],
+    requirements: [
+      "Strong spiritual foundation and active faith life",
+      "High level of empathy, compassion, and active listening",
+      "Strict adherence to confidentiality and trust",
+      "Prior experience in ministry or counseling is a strong advantage"
+    ],
+    commitment: ["Hybrid", "Estimated time: 3–5 hours per week", "Duration: Flexible"],
+    gains: [
+      "Spiritual growth and deep community connection",
+      "Experience in pastoral care and emotional support",
+      "Opportunity to serve the team in a foundational way",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "faithBackground", type: "textarea", label: "Briefly describe your faith journey and why you want to serve in the Prayerroom *", placeholder: "Your background...", required: true },
+      { id: "counselingExperience", type: "radio", label: "Do you have any formal training or experience in pastoral care or counseling? *", options: ["Yes", "No"], required: true },
+      { id: "confidentialityAgreement", type: "radio", label: "Do you agree to maintain absolute confidentiality regarding prayer requests and counseling sessions? *", options: ["Yes, I agree", "No"], required: true }
+    ]
+  },
+  {
+    id: "partnership-and-resource",
+    title: "Partnership and resource mobilization",
+    about: "We rely on strategic partnerships and resources to maximize our impact. This unit is dedicated to identifying sponsors, writing grants, and building relationships that sustain our programs.",
+    responsibilities: [
+      "Identify and approach potential corporate sponsors and donors",
+      "Assist in writing grant proposals and funding applications",
+      "Maintain a database of partners and handle donor communications",
+      "Develop innovative fundraising campaigns"
+    ],
+    requirements: [
+      "Experience in fundraising, sales, or business development",
+      "Exceptional written and verbal communication skills",
+      "Strategic thinking and strong networking abilities",
+      "Comfortable pitching ideas and making 'asks'"
+    ],
+    commitment: ["Remote", "Estimated time: 5–10 hours per week", "Duration: Minimum 6 months"],
+    gains: [
+      "Real-world experience in nonprofit fundraising and grant writing",
+      "Building a robust professional network",
+      "Strategic planning and corporate relations skills",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "fundraisingExperience", type: "select", label: "Years of experience in fundraising, grants, or sales *", options: ["None", "Less than 1 year", "1–3 years", "3+ years"], required: true },
+      { id: "proposalWriting", type: "radio", label: "Have you ever written a grant proposal or sponsorship pitch deck? *", options: ["Yes", "No"], required: true },
+      { id: "networkStrength", type: "textarea", label: "Describe your experience with networking or building professional partnerships *", placeholder: "Your experience...", required: true }
+    ]
+  },
+  {
+    id: "monitoring-and-evaluation",
+    title: "Monitoring and Evaluation",
+    about: "To ensure our interventions are truly effective, the M&E unit tracks progress, collects vital data, and measures the long-term impact of our projects across all communities.",
+    responsibilities: [
+      "Design surveys and data collection tools (e.g., KoboToolbox)",
+      "Collect and clean data from field outreaches",
+      "Analyze metrics to evaluate program effectiveness",
+      "Prepare clear, actionable impact reports for stakeholders"
+    ],
+    requirements: [
+      "Strong analytical and data management skills",
+      "Familiarity with M&E frameworks and data collection tools",
+      "High attention to detail and accuracy",
+      "Ability to translate complex data into readable reports"
+    ],
+    commitment: ["Remote/Hybrid", "Estimated time: 5–10 hours per week", "Duration: Minimum 6 months"],
+    gains: [
+      "Practical experience in impact measurement",
+      "Advanced data analysis and reporting skills",
+      "Exposure to NGO evaluation standards",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "dataTools", type: "text", label: "List the data collection/analysis tools you are proficient in (e.g., Excel, SPSS, KoboToolbox) *", placeholder: "e.g., Advanced Excel, PowerBI...", required: true },
+      { id: "meExperience", type: "select", label: "Years of experience in Monitoring & Evaluation or Data Analysis *", options: ["None", "0-1 years", "2-3 years", "4+ years"], required: true },
+      { id: "reportWriting", type: "radio", label: "Are you comfortable writing analytical reports based on data? *", options: ["Yes", "No"], required: true }
+    ]
+  },
+  {
+    id: "media-and-communications",
+    title: "Media and Communications",
+    about: "The Media and Communications unit is the voice of the organization. We amplify our impact through compelling storytelling, photography, videography, and strategic digital marketing.",
+    responsibilities: [
+      "Create engaging content for social media, newsletters, and blogs",
+      "Capture and edit photos and videos from outreaches",
+      "Design graphics for campaigns and reports",
+      "Manage social media platforms and public relations"
+    ],
+    requirements: [
+      "Creative eye for storytelling and visual design",
+      "Proficiency in relevant tools (e.g., Canva, Adobe Creative Suite, CapCut)",
+      "Strong copywriting and editing skills",
+      "Ability to meet deadlines in a fast-paced environment"
+    ],
+    commitment: ["Remote/Hybrid", "Estimated time: 8–12 hours per week", "Duration: Minimum 3 months"],
+    gains: [
+      "Building a professional portfolio with real-world impact content",
+      "Hands-on experience in digital marketing and PR",
+      "Networking with media professionals",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "mediaSpecialty", type: "select", label: "What is your primary area of expertise? *", options: ["Photography", "Videography/Editing", "Graphic Design", "Copywriting/Content", "Social Media Management", "Multiple Areas"], required: true },
+      { id: "softwareSkills", type: "text", label: "What creative software are you proficient in? *", placeholder: "e.g., Premiere Pro, Photoshop, Canva...", required: true },
+      { id: "portfolioLink", type: "text", label: "Link to your portfolio or sample work (Highly recommended)", placeholder: "https://...", required: false }
+    ]
+  },
+  {
+    id: "operations-and-logistics",
+    title: "Operations and Logistics",
+    about: "Our outreaches require meticulous planning and execution on the ground. The Operations unit ensures everything runs seamlessly, from transportation to supply chain management and venue setup.",
+    responsibilities: [
+      "Coordinate transportation and route planning for outreach teams",
+      "Manage the inventory of supplies, equipment, and outreach gear",
+      "Oversee venue preparation, crowd control, and site safety",
+      "Handle procurement and vendor relations when necessary"
+    ],
+    requirements: [
+      "Exceptional organizational and problem-solving skills",
+      "Ability to work well under pressure and adapt quickly",
+      "Reliability, punctuality, and a proactive mindset",
+      "Valid driver's license is an advantage but not strictly required"
+    ],
+    commitment: ["On-site (Outreach locations)", "Available for outreach weekends", "Duration: Flexible"],
+    gains: [
+      "Hands-on event management and operations experience",
+      "Leadership and rapid problem-solving skills",
+      "Direct involvement in successful community interventions",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "logisticsExperience", type: "select", label: "Years of experience in event planning, logistics, or operations *", options: ["None", "0-1 years", "2-3 years", "4+ years"], required: true },
+      { id: "hasDriversLicense", type: "radio", label: "Do you have a valid driver's license? *", options: ["Yes", "No"], required: true },
+      { id: "pressureHandling", type: "textarea", label: "Describe a time when a plan went wrong and how you quickly resolved it *", placeholder: "Your experience...", required: true }
+    ]
+  },
+  {
+    id: "finance-unit",
+    title: "Finance Unit",
+    about: "The Finance unit ensures transparency, accountability, and the financial health of our programs. We handle budgeting, expense tracking, and comprehensive financial reporting.",
+    responsibilities: [
+      "Assist with program budgeting and financial forecasting",
+      "Track daily expenses, process reimbursements, and file receipts",
+      "Prepare monthly and quarterly financial reports",
+      "Ensure compliance with organizational financial policies"
+    ],
+    requirements: [
+      "Background in accounting, finance, or business administration",
+      "High attention to detail and numerical accuracy",
+      "Proficiency in Excel and familiarity with accounting software",
+      "Strong ethical compass and integrity"
+    ],
+    commitment: ["Remote/Hybrid", "Estimated time: 5–8 hours per week", "Duration: Minimum 6 months"],
+    gains: [
+      "Practical experience in NGO financial management",
+      "Budgeting and compliance skills",
+      "Understanding of non-profit accounting standards",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "financeExperience", type: "select", label: "Years of experience in accounting or finance *", options: ["None", "0-1 years", "2-3 years", "4+ years"], required: true },
+      { id: "financeTools", type: "text", label: "What financial tools or software are you comfortable using? *", placeholder: "e.g., Advanced Excel, QuickBooks...", required: true },
+      { id: "attentionToDetail", type: "radio", label: "Are you comfortable handling sensitive financial data with strict confidentiality? *", options: ["Yes", "No"], required: true }
+    ]
+  },
+  {
+    id: "admin-unit",
+    title: "Admin Unit",
+    about: "The Admin unit provides the essential backbone of our organization, keeping everything running efficiently. This includes documentation, scheduling, and supporting all other units.",
+    responsibilities: [
+      "Manage organizational correspondence, emails, and schedules",
+      "Maintain organized digital records and documentation",
+      "Take minutes during meetings and track action items",
+      "Provide general administrative support to project leads"
+    ],
+    requirements: [
+      "Strong organizational and administrative skills",
+      "Proficiency in office tools (Google Workspace, Microsoft Office)",
+      "Excellent written communication skills",
+      "Ability to multitask and prioritize effectively"
+    ],
+    commitment: ["Remote/Hybrid", "Estimated time: 5–10 hours per week", "Duration: Minimum 6 months"],
+    gains: [
+      "Extensive experience in office administration",
+      "Exposure to the inner workings of an NGO",
+      "Enhanced time management and organizational skills",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "adminExperience", type: "select", label: "Years of administrative or executive assistant experience *", options: ["None", "0-1 years", "2-3 years", "4+ years"], required: true },
+      { id: "officeTools", type: "text", label: "Which office tools are you highly proficient in? *", placeholder: "e.g., Google Workspace, Microsoft Word/Excel...", required: true },
+      { id: "organizationSkills", type: "textarea", label: "How do you keep yourself organized when handling multiple tasks? *", placeholder: "Your methods...", required: true }
+    ]
+  },
+  {
+    id: "safeguarding-and-ethics",
+    title: "Safeguarding and Ethics",
+    about: "We prioritize the safety, dignity, and rights of everyone we interact with. This unit ensures our work is conducted ethically and that robust safeguarding policies are enforced.",
+    responsibilities: [
+      "Implement and monitor safeguarding policies during all activities",
+      "Conduct ethics and compliance training for staff and volunteers",
+      "Handle confidential reports, grievances, and safeguarding issues",
+      "Ensure compliance with local laws and humanitarian standards"
+    ],
+    requirements: [
+      "Deep understanding of safeguarding principles and child protection",
+      "Background in law, social work, HR, or compliance is highly desirable",
+      "High integrity, impartiality, and discretion",
+      "Ability to handle sensitive situations calmly and professionally"
+    ],
+    commitment: ["Remote/Hybrid", "Estimated time: 5–8 hours per week", "Duration: Minimum 6 months"],
+    gains: [
+      "Experience in compliance, ethics, and safeguarding",
+      "Policy implementation and training skills",
+      "Contributing to a secure and accountable organizational culture",
+      "Certificate of service"
+    ],
+    customQuestions: [
+      { id: "safeguardingKnowledge", type: "radio", label: "Do you have prior knowledge or training in safeguarding and child protection? *", options: ["Yes", "No"], required: true },
+      { id: "complianceExperience", type: "textarea", label: "Describe your experience with compliance, ethics, or handling sensitive reports *", placeholder: "Your experience...", required: true },
+      { id: "scenarioHandling", type: "textarea", label: "Briefly explain how you would handle a report of a volunteer behaving unethically during an outreach *", placeholder: "Your approach...", required: true }
     ]
   }
 ];
